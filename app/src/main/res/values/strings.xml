@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BarlettApp</string>
+    <string name="usernameText">Username</string>
+    <string name="passwordText">Password</string>
+    <string name="buttonLogin">Login</string>
+    <string name="buttonRegister">Register</string>
+    <string name="mailText">Email</string>
+    <string name="progressRegistration">Registering user...</string>
+    <string name="toastErrorRegistration">Error during registration</string>
+</resources>
