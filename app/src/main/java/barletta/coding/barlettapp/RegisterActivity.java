@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerUser(){
 
-        String urlRegister = "http://barlettacoding.altervista.org/Registrazione.php";
+        String urlRegister = "http://barlettacoding.altervista.org/registrazione.php";
 
         final String username = usernameR.getText().toString().trim();
         final String password = passwordR.getText().toString().trim();
@@ -92,8 +92,17 @@ public class RegisterActivity extends AppCompatActivity {
             }
         };
         //La requestQ serve a far partire la richiesta. Si usa la stringRequest che abbiamo creato
-        RequestQueue requestQ = Volley.newRequestQueue(this);
-        requestQ.add(stringRequest);
+        //RequestQueue requestQ = Volley.newRequestQueue(this);
+        //requestQ.add(stringRequest);
+
+        if(username.isEmpty() || password.isEmpty() || email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            progressDialog.hide();
+            Toast.makeText(getApplicationContext(),"Missing Field",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+        }
+
 
     }
 
