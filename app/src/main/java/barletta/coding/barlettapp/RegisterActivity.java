@@ -98,6 +98,15 @@ public class RegisterActivity extends AppCompatActivity {
         if(username.isEmpty() || password.isEmpty() || email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             progressDialog.hide();
             Toast.makeText(getApplicationContext(),"Missing Field",Toast.LENGTH_SHORT).show();
+            if(username.isEmpty()){
+                usernameR.setError(getString(R.string.missingUsername));
+            }
+            if(email.isEmpty()){
+                emailR.setError(getString(R.string.missingEmail));
+            }
+            if(password.isEmpty()){
+                passwordR.setError(getString(R.string.missingPassword));
+            }
         }
         else {
             MySingleton.getInstance(this).addToRequestQueue(stringRequest);

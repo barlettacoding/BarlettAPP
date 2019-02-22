@@ -1,5 +1,6 @@
 package barletta.coding.barlettapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class LoginAndRegister extends AppCompatActivity {
     private EditText password;
     private Button loginButton;
     private Button registerButton;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class LoginAndRegister extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginTest();
+                userLogin();
             }
         });
 
@@ -57,29 +59,34 @@ public class LoginAndRegister extends AppCompatActivity {
         this.password = findViewById(R.id.editTextPassword);
         this.loginButton = findViewById(R.id.buttonLogin);
         this.registerButton = findViewById(R.id.buttonRegister);
+        this.progressDialog = new ProgressDialog(this);
+        this.progressDialog.setMessage(getString(R.string.progressDialogLogin));
+
 
     }
 
-    public void loginTest(){
-
-        String urlRegister = "http://barlettacoding.altervista.org/login.php";
-
+    private void userLogin(){
         final String username = this.username.getText().toString().trim();
         final String password = this.password.getText().toString().trim();
+        String urlLogin = "http://barlettacoding.altervista.org/login.php";
 
+        progressDialog.show();
 
-
-        //StringRequest serve per fare le richieste
-        //SI passa come primo parametro che tipo di richiesta, secondo paramentro il link al php da usare
-        //e poi i listener
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlRegister,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlLogin,
                 new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
-
+                        progressDialog.dismiss();
                         try{
                             JSONObject jsonObject = new JSONObject(response);
-                            Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                            if(!jsonObject.getBoolean("error")){//Da qui ci muoviamo alla prossima activity
+                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(jsonObject.getInt("id"),
+                                        jsonObject.getString("username"),jsonObject.getString("email"), jsonObject.getInt("tipo"));
+                                Toast.makeText(getApplicationContext(),"Loggin effettuato",Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                            }
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -88,7 +95,7 @@ public class LoginAndRegister extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        progressDialog.hide();
                         Toast.makeText(getApplicationContext(),getString(R.string.toastErrorRegistration), Toast.LENGTH_SHORT).show();
                     }
                 }){
@@ -98,19 +105,22 @@ public class LoginAndRegister extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("username",username);
                 params.put("password",password);
-
-
                 return params;
             }
         };
-        //La requestQ serve a far partire la richiesta. Si usa la stringRequest che abbiamo creato
-        //RequestQueue requestQ = Volley.newRequestQueue(this);
-        //requestQ.add(stringRequest);
 
-
+        if(username.isEmpty() || password.isEmpty()){
+            progressDialog.hide();
+            if(username.isEmpty()){
+                this.username.setError(getString(R.string.missingUsername));
+            }
+            if(password.isEmpty()){
+                this.password.setError(getString(R.string.missingPassword));
+            }
+        }
+        else{
             MySingleton.getInstance(this).addToRequestQueue(stringRequest);
-        
-
+        }
 
 
     }

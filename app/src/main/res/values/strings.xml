@@ -7,4 +7,8 @@
     <string name="mailText">Email</string>
     <string name="progressRegistration">Registering user...</string>
     <string name="toastErrorRegistration">Error during registration</string>
+    <string name="progressDialogLogin">Logging...</string>
+    <string name="missingUsername">Missing username</string>
+    <string name="missingEmail">Missing email</string>
+    <string name="missingPassword">Missing password</string>
 </resources>
