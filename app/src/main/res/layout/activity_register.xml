@@ -48,15 +48,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextMailR" />
 
+    <EditText
+        android:id="@+id/editTextPasswordRConf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="@string/confermaPassword"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordR" />
+
     <Button
         android:id="@+id/buttonRegisterR"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:text="@string/buttonRegister"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordR" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRConf" />
 </android.support.constraint.ConstraintLayout>

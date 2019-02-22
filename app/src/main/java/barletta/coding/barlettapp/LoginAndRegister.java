@@ -1,7 +1,10 @@
 package barletta.coding.barlettapp;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +36,15 @@ public class LoginAndRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_and_register);
+        /*Controlliamo se l'utente è loggato, se è loggato
+        questa Activity si interrompe con il metodo finish() e
+        passiamo subito all'activity dell'homePage.
+         */
+        if(SharedPrefManager.getInstance(this).isLogged()){
+            finish();
+            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+            return;
+        }
         inizializeComponent();
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +62,7 @@ public class LoginAndRegister extends AppCompatActivity {
                 userLogin();
             }
         });
-
+        broadCastCallFromRegister();
     }
 
     public void inizializeComponent(){
@@ -80,11 +92,14 @@ public class LoginAndRegister extends AppCompatActivity {
                         progressDialog.dismiss();
                         try{
                             JSONObject jsonObject = new JSONObject(response);
+                            //Modificare il messaggio di errore. Fare la stringa
                             if(!jsonObject.getBoolean("error")){//Da qui ci muoviamo alla prossima activity
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(jsonObject.getInt("id"),
                                         jsonObject.getString("username"),jsonObject.getString("email"), jsonObject.getInt("tipo"));
-                                Toast.makeText(getApplicationContext(),"Loggin effettuato",Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                                finish();
                             }else{
+                                //Modificare il messaggio di errore. fare la stringa
                                 Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
                             }
                         }catch (JSONException e){
@@ -100,6 +115,7 @@ public class LoginAndRegister extends AppCompatActivity {
                     }
                 }){
             //Qui mettiamo i parametri che dobbiamo passare al php
+            //Per fare il login passiamo al php l'username e la password
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -108,7 +124,7 @@ public class LoginAndRegister extends AppCompatActivity {
                 return params;
             }
         };
-
+        //Controlliamo se l'utente a messo i dati. Se non li ha messi, non lo facciamo neanche andare avanti
         if(username.isEmpty() || password.isEmpty()){
             progressDialog.hide();
             if(username.isEmpty()){
@@ -118,11 +134,27 @@ public class LoginAndRegister extends AppCompatActivity {
                 this.password.setError(getString(R.string.missingPassword));
             }
         }
+        //Se li ha messi, chiamamo la requestQueue e gli passiamo la stringRequest che contiene i dati per il login
         else{
             MySingleton.getInstance(this).addToRequestQueue(stringRequest);
         }
 
 
+    }
+
+    public void broadCastCallFromRegister(){
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish")) {
+                    //finishing the activity
+                    finish();
+                }
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish"));
     }
 
 }
