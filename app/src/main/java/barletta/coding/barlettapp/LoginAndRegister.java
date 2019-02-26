@@ -36,6 +36,7 @@ public class LoginAndRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_and_register);
+
         /*Controlliamo se l'utente è loggato, se è loggato
         questa Activity si interrompe con il metodo finish() e
         passiamo subito all'activity dell'homePage.

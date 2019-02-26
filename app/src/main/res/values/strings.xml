@@ -13,4 +13,5 @@
     <string name="missingPassword">Missing password</string>
     <string name="passwordNotMatch">Password doesnt match</string>
     <string name="confermaPassword">Confirm password</string>
+
 </resources>

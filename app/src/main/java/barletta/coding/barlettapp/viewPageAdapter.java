@@ -1,27 +1,38 @@
 package barletta.coding.barlettapp;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.ImageLoader;
+
+import java.util.List;
+
 public class viewPageAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
-    public  viewPageAdapter(Context context){
+    private List<SliderUtils> sliderImg;
+    private ImageLoader imageLoader;
+    //private Integer[] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
+    public  viewPageAdapter(List<SliderUtils> sliderImg,Context context){
+
+        this.sliderImg = sliderImg;
+
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return images.length;
+        return sliderImg.size();
     }
 
     @Override
@@ -34,8 +45,13 @@ public class viewPageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
+
+        SliderUtils utils = sliderImg.get(position);
+
         ImageView imageView = view.findViewById(R.id.imageViewCustom);
-        imageView.setImageResource(images[position]);
+        //imageView.setImageResource(images[position]);
+        imageLoader = MySingleton.getInstance(context).getImageLoader();
+        imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher,android.R.drawable.ic_dialog_alert));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
