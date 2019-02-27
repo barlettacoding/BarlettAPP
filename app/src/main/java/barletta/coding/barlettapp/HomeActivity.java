@@ -4,11 +4,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Slide;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,10 +37,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     //TUTTO DI PROVA. SERVE SOLO A CAPIRE COME PRENDERE I DATI
 
-    private Button buttonProfile;
+
     private int tipo;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
@@ -45,6 +50,8 @@ public class HomeActivity extends AppCompatActivity {
     RequestQueue rq;
     List<SliderUtils> sliderImg;
     public static Locale[] localiTendenza;
+    BottomNavigationView bottomNavigation;
+
 
 
     String request_url = "http://barlettacoding.altervista.org/getImmagini.php";
@@ -103,18 +110,56 @@ public class HomeActivity extends AppCompatActivity {
         tipo = SharedPrefManager.getInstance(this).getTipo();
 
 
-        buttonProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), userProfileActivity.class));
-
-            }
-        });
-
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        Fragment fragment = null;
+
+        switch (menuItem.getItemId()){
+            case R.id.navigation_home :
+                fragment = new EmptyFragment();
+                showClassObject();
+                break;
+            case R.id.navigation_dashboard:
+                fragment = new UserFragment();
+                hideClasseObject();
+                break;
+        }
+
+
+
+        return loadFragment(fragment);
+    }
+
+    private boolean loadFragment(Fragment fragment){
+
+        if(fragment != null){
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentView, fragment)
+                    .commit();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private void hideClasseObject(){
+
+        viewPager.setVisibility(View.GONE);
+        sliderDotspanel.setVisibility(View.GONE);
+
+    }
+
+    private void showClassObject(){
+        viewPager.setVisibility(View.VISIBLE);
+        sliderDotspanel.setVisibility(View.VISIBLE);
+    }
 
     public class MyTimerTask extends TimerTask{
 
@@ -218,8 +263,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void inizializeComponent(){
-        buttonProfile = findViewById(R.id.buttonProfile);
+
+        bottomNavigation = findViewById(R.id.navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(this);
     }
+
+
 
     public void broadCastCallFromUser(){
         BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {

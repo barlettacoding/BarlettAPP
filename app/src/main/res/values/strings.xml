@@ -13,5 +13,10 @@
     <string name="missingPassword">Missing password</string>
     <string name="passwordNotMatch">Password doesnt match</string>
     <string name="confermaPassword">Confirm password</string>
+    <string name="title_activity_cancella">cancella</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="profile_bottom_bar">Profile</string>
 
 </resources>
