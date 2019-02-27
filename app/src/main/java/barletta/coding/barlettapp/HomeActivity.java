@@ -1,6 +1,9 @@
 package barletta.coding.barlettapp;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +35,7 @@ import java.util.TimerTask;
 public class HomeActivity extends AppCompatActivity {
     //TUTTO DI PROVA. SERVE SOLO A CAPIRE COME PRENDERE I DATI
 
-    private Button logoutB;
+    private Button buttonProfile;
     private int tipo;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
@@ -41,6 +44,8 @@ public class HomeActivity extends AppCompatActivity {
     viewPageAdapter viewPageAdapt;
     RequestQueue rq;
     List<SliderUtils> sliderImg;
+    public static Locale[] localiTendenza;
+
 
     String request_url = "http://barlettacoding.altervista.org/getImmagini.php";
 
@@ -48,6 +53,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        broadCastCallFromUser();
+
+        inizializeComponent();
 
         rq = Volley.newRequestQueue(this);
 
@@ -89,20 +98,20 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(new Intent(this,LoginAndRegister.class));
         }
 
-        logoutB = findViewById(R.id.buttonLogOut);
+
 
         tipo = SharedPrefManager.getInstance(this).getTipo();
 
 
-        logoutB.setOnClickListener(new View.OnClickListener() {
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPrefManager.getInstance(getApplicationContext()).logout();
-                startActivity(new Intent(HomeActivity.this,LoginAndRegister.class));
-                finish();
-                return;
+
+                startActivity(new Intent(getApplicationContext(), userProfileActivity.class));
+
             }
         });
+
 
     }
 
@@ -128,10 +137,12 @@ public class HomeActivity extends AppCompatActivity {
 
                         viewPager.setCurrentItem(3);
 
+                    }else if(viewPager.getCurrentItem() == 3){
+
+                        viewPager.setCurrentItem(4);
+
                     }else{
-
                         viewPager.setCurrentItem(0);
-
                     }
 
                 }
@@ -142,11 +153,16 @@ public class HomeActivity extends AppCompatActivity {
 
     public void sendRequest(){
 
+        localiTendenza = new Locale[5];
+
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, request_url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
-                for(int i = 0; i< response.length(); i++){
+                for(int i = 0; i< localiTendenza.length; i++){
+
+                    localiTendenza[i] = new Locale();
 
                     SliderUtils sliderUtils = new SliderUtils();
 
@@ -154,6 +170,10 @@ public class HomeActivity extends AppCompatActivity {
                         JSONObject jsonObject = response.getJSONObject(i);
 
                         sliderUtils.setSliderImageUrl(jsonObject.getString("immagine"));
+                        localiTendenza[i].setNome(jsonObject.getString("nome"));
+                        localiTendenza[i].setDescrizione(jsonObject.getString("descrizione"));
+                        localiTendenza[i].setID(jsonObject.getInt("ID"));
+                        localiTendenza[i].setIdGestore(jsonObject.getInt("idGestore"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -197,5 +217,23 @@ public class HomeActivity extends AppCompatActivity {
         //MySingleton.getInstance(this).addToRequestQueueImage(jsonArrayRequest);
     }
 
+    public void inizializeComponent(){
+        buttonProfile = findViewById(R.id.buttonProfile);
+    }
+
+    public void broadCastCallFromUser(){
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish")) {
+                    //finishing the activity
+                    finish();
+                }
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish"));
+    }
 
 }

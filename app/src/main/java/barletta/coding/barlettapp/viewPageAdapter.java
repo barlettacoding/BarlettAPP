@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -49,9 +50,34 @@ public class viewPageAdapter extends PagerAdapter {
         SliderUtils utils = sliderImg.get(position);
 
         ImageView imageView = view.findViewById(R.id.imageViewCustom);
+        TextView nomeLocale = view.findViewById(R.id.textViewNomeLocale);
         //imageView.setImageResource(images[position]);
         imageLoader = MySingleton.getInstance(context).getImageLoader();
         imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher,android.R.drawable.ic_dialog_alert));
+
+        if(position == 0){
+            nomeLocale.setText(HomeActivity.localiTendenza[0].getNome());
+        }
+        else if(position == 1){
+
+            nomeLocale.setText(HomeActivity.localiTendenza[1].getNome());
+
+        }
+        else if(position == 2){
+
+            nomeLocale.setText(HomeActivity.localiTendenza[2].getNome());
+
+        }
+        else if(position == 3){
+
+            nomeLocale.setText(HomeActivity.localiTendenza[3].getNome());
+
+        }
+        else if(position == 4){
+
+            nomeLocale.setText(HomeActivity.localiTendenza[4].getNome());
+
+        }
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +89,13 @@ public class viewPageAdapter extends PagerAdapter {
                 else if(position == 1){
                     Toast.makeText(context, "Loli 2", Toast.LENGTH_SHORT).show();
                 }
-                else{
+                else if(position == 2){
+                    Toast.makeText(context, "Loli 3", Toast.LENGTH_SHORT).show();
+                }
+                else if(position == 3){
+                    Toast.makeText(context, "Loli 3", Toast.LENGTH_SHORT).show();
+                }
+                else if(position == 4){
                     Toast.makeText(context, "Loli 3", Toast.LENGTH_SHORT).show();
                 }
             }
