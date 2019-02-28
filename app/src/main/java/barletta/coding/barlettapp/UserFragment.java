@@ -6,16 +6,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class UserFragment extends Fragment {
 
     TextView name, email;
-    Button buttonLogout;
+    Button buttonLogout, deleteAccount;
 
     @Nullable
     @Override
@@ -32,9 +36,14 @@ public class UserFragment extends Fragment {
         email = getView().findViewById(R.id.textViewProfileEmail);
 
 
+
         name.setText(getString(R.string.usernameText)+" : "+SharedPrefManager.getInstance(getActivity()).getUsername());
         email.setText(getString(R.string.mailText)+" : "+SharedPrefManager.getInstance(getActivity()).getUserEmail());
         buttonLogout = getView().findViewById(R.id.buttonProfileLogout);
+        deleteAccount= getView().findViewById(R.id.buttonDeleteAccount);
+
+        buttonLogout.setText(getString(R.string.buttonProfileLogout));
+        deleteAccount.setText(getString(R.string.buttonDeleteAccount));
 
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +53,23 @@ public class UserFragment extends Fragment {
             }
         });
 
+
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((HomeActivity)getActivity()).createPopup(getView());
+
+            }
+        });
+
+
     }
 
 
 
-}
+    }
+
+
+
+

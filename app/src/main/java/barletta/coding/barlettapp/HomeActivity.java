@@ -13,11 +13,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Slide;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,9 +61,9 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_home);
 
         //Come prima cosa, vediamo se l'utente è loggato, se no, lo mandiamo al login
-        if(!SharedPrefManager.getInstance(this).isLogged()){
+        if (!SharedPrefManager.getInstance(this).isLogged()) {
             finish();
-            startActivity(new Intent(this,LoginAndRegister.class));
+            startActivity(new Intent(this, LoginAndRegister.class));
         }
 
         broadCastCallFromUser();
@@ -85,8 +89,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             @Override
             public void onPageSelected(int position) {
 
-                for(int i = 0; i< dotscount; i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.nonactive_dot));
+                for (int i = 0; i < dotscount; i++) {
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
                 }
 
                 dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
@@ -101,18 +105,16 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
 
-
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        String titleActioBar ="";
+        String titleActioBar = "";
         Fragment fragment = null;
 
-        switch (menuItem.getItemId()){
-            case R.id.navigation_home :
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
                 fragment = new EmptyFragment();
                 showClassObject();
                 titleActioBar = getString(R.string.app_name);
@@ -127,22 +129,21 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
             case R.id.navigation_favourite:
-                Toast.makeText(this,"Preferiti",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Preferiti", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.navigation_diary:
-                Toast.makeText(this,"Diario",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Diario", Toast.LENGTH_SHORT).show();
                 break;
 
         }
 
 
-
         return loadFragment(fragment);
     }
 
-    private boolean loadFragment(Fragment fragment){
+    private boolean loadFragment(Fragment fragment) {
 
-        if(fragment != null){
+        if (fragment != null) {
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -155,19 +156,19 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-    private void hideClasseObject(){
+    private void hideClasseObject() {
 
         viewPager.setVisibility(View.GONE);
         sliderDotspanel.setVisibility(View.GONE);
 
     }
 
-    private void showClassObject(){
+    private void showClassObject() {
         viewPager.setVisibility(View.VISIBLE);
         sliderDotspanel.setVisibility(View.VISIBLE);
     }
 
-    public class MyTimerTask extends TimerTask{
+    public class MyTimerTask extends TimerTask {
 
         @Override
         public void run() {
@@ -176,23 +177,23 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 @Override
                 public void run() {
 
-                    if(viewPager.getCurrentItem() == 0){
+                    if (viewPager.getCurrentItem() == 0) {
 
                         viewPager.setCurrentItem(1);
 
-                    }else if(viewPager.getCurrentItem() == 1){
+                    } else if (viewPager.getCurrentItem() == 1) {
 
                         viewPager.setCurrentItem(2);
 
-                    }else if(viewPager.getCurrentItem() == 2){
+                    } else if (viewPager.getCurrentItem() == 2) {
 
                         viewPager.setCurrentItem(3);
 
-                    }else if(viewPager.getCurrentItem() == 3){
+                    } else if (viewPager.getCurrentItem() == 3) {
 
                         viewPager.setCurrentItem(4);
 
-                    }else{
+                    } else {
                         viewPager.setCurrentItem(0);
                     }
 
@@ -202,7 +203,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
-    public void sendRequest(){
+    public void sendRequest() {
 
         localiTendenza = new Locale[5];
 
@@ -211,7 +212,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             @Override
             public void onResponse(JSONArray response) {
 
-                for(int i = 0; i< localiTendenza.length; i++){
+                for (int i = 0; i < localiTendenza.length; i++) {
 
                     localiTendenza[i] = new Locale();
 
@@ -238,17 +239,16 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 viewPager.setAdapter(viewPageAdapt);
 
 
-
                 dotscount = viewPageAdapt.getCount();
 
                 dots = new ImageView[dotscount];
 
-                for(int i = 0; i<dotscount;i++){
+                for (int i = 0; i < dotscount; i++) {
 
                     dots[i] = new ImageView(HomeActivity.this);
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.nonactive_dot));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(8, 0,8,0);
+                    params.setMargins(8, 0, 8, 0);
 
                     sliderDotspanel.addView(dots[i], params);
 
@@ -260,7 +260,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext() ,"Errore",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Errore", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -268,14 +268,14 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         //MySingleton.getInstance(this).addToRequestQueueImage(jsonArrayRequest);
     }
 
-    public void inizializeComponent(){
+    public void inizializeComponent() {
 
         bottomNavigation = findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(this);
     }
 
     //BroadCast per finire l'activity
-    public void broadCastCallFromUser(){
+    public void broadCastCallFromUser() {
         BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
 
             @Override
@@ -291,10 +291,33 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-    public void setActionBar(Boolean setting){
+    public void setActionBar(Boolean setting) {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(setting);
     }
 
+    public void createPopup(View view) {
 
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_layout, null);
+
+        //creazione popup
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popup = new PopupWindow(popupView, width, height, focusable);
+
+        //mostra popup
+        popup.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        //annulla popup
+        /*popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popup.dismiss();
+                return true;
+            }
+        });*/
+
+    }
 }

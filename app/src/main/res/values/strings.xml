@@ -20,5 +20,7 @@
     <string name="profile_bottom_bar">Profile</string>
     <string name="favourite_bottom_bar">Favourite</string>
     <string name="diary_bottom_bar">Diary</string>
+    <string name="buttonDeleteAccount">Delete Account</string>
+    <string name="buttonProfileLogout">Logout</string>
 
 </resources>
