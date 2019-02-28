@@ -38,21 +38,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    //TUTTO DI PROVA. SERVE SOLO A CAPIRE COME PRENDERE I DATI
 
-
-    private int tipo;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     private int dotscount;
-    private ImageView[] dots;
-    viewPageAdapter viewPageAdapt;
-    RequestQueue rq;
+    private ImageView[] dots; //ImageView per i punti sotto le immagini
+    viewPageAdapter viewPageAdapt; //Adapter Per lo slide di immagini
+    RequestQueue rq; //richiesta per prendere i dati dei locali
     List<SliderUtils> sliderImg;
-    public static Locale[] localiTendenza;
-    BottomNavigationView bottomNavigation;
-
-
+    public static Locale[] localiTendenza; //Inseriamo i dati dei 5 locali di tendenza qui
+    BottomNavigationView bottomNavigation; //BottomNavigation bar. Dobbiamo nascondere l'activity
 
     String request_url = "http://barlettacoding.altervista.org/getImmagini.php";
 
@@ -60,6 +55,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //Come prima cosa, vediamo se l'utente è loggato, se no, lo mandiamo al login
+        if(!SharedPrefManager.getInstance(this).isLogged()){
+            finish();
+            startActivity(new Intent(this,LoginAndRegister.class));
+        }
 
         broadCastCallFromUser();
 
@@ -71,7 +72,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         viewPager = findViewById(R.id.slideShowHome);
 
-        sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
+        sliderDotspanel = findViewById(R.id.SliderDots);
 
         sendRequest();
 
@@ -99,15 +100,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
-        //Come prima cosa, vediamo se l'utente è loggato, se no, lo mandiamo al login
-        if(!SharedPrefManager.getInstance(this).isLogged()){
-            finish();
-            startActivity(new Intent(this,LoginAndRegister.class));
-        }
-
-
-
-        tipo = SharedPrefManager.getInstance(this).getTipo();
 
 
 
@@ -116,17 +108,31 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
+        String titleActioBar ="";
         Fragment fragment = null;
 
         switch (menuItem.getItemId()){
             case R.id.navigation_home :
                 fragment = new EmptyFragment();
                 showClassObject();
+                titleActioBar = getString(R.string.app_name);
+                setActionBar(false);
+                getSupportActionBar().setTitle(titleActioBar);
                 break;
-            case R.id.navigation_dashboard:
+            case R.id.navigation_profile:
                 fragment = new UserFragment();
                 hideClasseObject();
+                titleActioBar = getString(R.string.profile_bottom_bar);
+                setActionBar(true);
+                getSupportActionBar().setTitle(titleActioBar);
                 break;
+            case R.id.navigation_favourite:
+                Toast.makeText(this,"Preferiti",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.navigation_diary:
+                Toast.makeText(this,"Diario",Toast.LENGTH_SHORT).show();
+                break;
+
         }
 
 
@@ -268,8 +274,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigation.setOnNavigationItemSelectedListener(this);
     }
 
-
-
+    //BroadCast per finire l'activity
     public void broadCastCallFromUser(){
         BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
 
@@ -284,5 +289,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         };
         registerReceiver(broadcast_reciever, new IntentFilter("finish"));
     }
+
+
+    public void setActionBar(Boolean setting){
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(setting);
+    }
+
 
 }

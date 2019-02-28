@@ -18,5 +18,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="profile_bottom_bar">Profile</string>
+    <string name="favourite_bottom_bar">Favourite</string>
+    <string name="diary_bottom_bar">Diary</string>
 
 </resources>
