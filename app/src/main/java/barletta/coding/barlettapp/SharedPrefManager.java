@@ -30,7 +30,7 @@ public class SharedPrefManager {
         return instance;
     }
 
-    public boolean userLogin(int ID, String username, String email, int Tipo){
+    public boolean userLogin(int ID, String username, String email, int Tipo) {
         SharedPreferences sharedPref = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         //L'editor fa tipo una mappa, dove mettiamo nelle variabili che abbiamo creato
@@ -43,18 +43,20 @@ public class SharedPrefManager {
         editor.apply();
         return true;
     }
+
     //Ci serve a vedere se l'utente è loggato
-    public boolean isLogged(){
+    public boolean isLogged() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
-        if(sharedPreferences.getString(KEY_USERNAME, null) != null){
+        if (sharedPreferences.getString(KEY_USERNAME, null) != null) {
             return true;
         }
 
         return false;
     }
+
     //Indovina un pò?
-    public boolean logout(){
+    public boolean logout() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
@@ -62,18 +64,23 @@ public class SharedPrefManager {
         return true;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_USERNAME,null);
+        return sharedPreferences.getString(KEY_USERNAME, null);
     }
 
-    public String getUserEmail(){
+    public String getUserEmail() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_USER_MAIL,null);
+        return sharedPreferences.getString(KEY_USER_MAIL, null);
     }
 
-    public int getTipo(){
+    public int getTipo() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(KEY_USER_TIPO,0);
+        return sharedPreferences.getInt(KEY_USER_TIPO, 0);
+    }
+
+    public int getId() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(KEY_USER_ID, 0);
     }
 }

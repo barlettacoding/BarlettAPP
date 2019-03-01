@@ -15,6 +15,16 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserFragment extends Fragment {
 
@@ -36,11 +46,13 @@ public class UserFragment extends Fragment {
         email = getView().findViewById(R.id.textViewProfileEmail);
 
 
+        //Conferma elimina account
 
-        name.setText(getString(R.string.usernameText)+" : "+SharedPrefManager.getInstance(getActivity()).getUsername());
-        email.setText(getString(R.string.mailText)+" : "+SharedPrefManager.getInstance(getActivity()).getUserEmail());
+        name.setText(getString(R.string.usernameText) + " : " + SharedPrefManager.getInstance(getActivity()).getUsername());
+        email.setText(getString(R.string.mailText) + " : " + SharedPrefManager.getInstance(getActivity()).getUserEmail());
+
         buttonLogout = getView().findViewById(R.id.buttonProfileLogout);
-        deleteAccount= getView().findViewById(R.id.buttonDeleteAccount);
+        deleteAccount = getView().findViewById(R.id.buttonDeleteAccount);
 
         buttonLogout.setText(getString(R.string.buttonProfileLogout));
         deleteAccount.setText(getString(R.string.buttonDeleteAccount));
@@ -49,7 +61,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SharedPrefManager.getInstance(getActivity()).logout();
-                startActivity(new Intent(getActivity(),LoginAndRegister.class));
+                startActivity(new Intent(getActivity(), LoginAndRegister.class));
             }
         });
 
@@ -58,7 +70,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ((HomeActivity)getActivity()).createPopup(getView());
+                ((HomeActivity) getActivity()).createPopup(getView());
 
             }
         });
@@ -66,9 +78,7 @@ public class UserFragment extends Fragment {
 
     }
 
-
-
-    }
+}
 
 
 

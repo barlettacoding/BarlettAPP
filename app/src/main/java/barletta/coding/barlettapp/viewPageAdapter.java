@@ -23,8 +23,9 @@ public class viewPageAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     private List<SliderUtils> sliderImg;
     private ImageLoader imageLoader;
+
     //private Integer[] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
-    public  viewPageAdapter(List<SliderUtils> sliderImg,Context context){
+    public viewPageAdapter(List<SliderUtils> sliderImg, Context context) {
 
         this.sliderImg = sliderImg;
 
@@ -53,27 +54,23 @@ public class viewPageAdapter extends PagerAdapter {
         TextView nomeLocale = view.findViewById(R.id.textViewNomeLocale);
         //imageView.setImageResource(images[position]);
         imageLoader = MySingleton.getInstance(context).getImageLoader();
-        imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher,android.R.drawable.ic_dialog_alert));
+        imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
-        if(position == 0){
+        if (position == 0) {
             nomeLocale.setText(HomeActivity.localiTendenza[0].getNome());
-        }
-        else if(position == 1){
+        } else if (position == 1) {
 
             nomeLocale.setText(HomeActivity.localiTendenza[1].getNome());
 
-        }
-        else if(position == 2){
+        } else if (position == 2) {
 
             nomeLocale.setText(HomeActivity.localiTendenza[2].getNome());
 
-        }
-        else if(position == 3){
+        } else if (position == 3) {
 
             nomeLocale.setText(HomeActivity.localiTendenza[3].getNome());
 
-        }
-        else if(position == 4){
+        } else if (position == 4) {
 
             nomeLocale.setText(HomeActivity.localiTendenza[4].getNome());
 
@@ -82,27 +79,23 @@ public class viewPageAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position == 0){
+                if (position == 0) {
                     //FAI ROBE
                     Toast.makeText(context, "Loli 1", Toast.LENGTH_SHORT).show();
-                }
-                else if(position == 1){
+                } else if (position == 1) {
                     Toast.makeText(context, "Loli 2", Toast.LENGTH_SHORT).show();
-                }
-                else if(position == 2){
+                } else if (position == 2) {
                     Toast.makeText(context, "Loli 3", Toast.LENGTH_SHORT).show();
-                }
-                else if(position == 3){
+                } else if (position == 3) {
                     Toast.makeText(context, "Loli 3", Toast.LENGTH_SHORT).show();
-                }
-                else if(position == 4){
+                } else if (position == 4) {
                     Toast.makeText(context, "Loli 3", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         ViewPager vp = (ViewPager) container;
-        vp.addView( view, 0);
+        vp.addView(view, 0);
         return view;
     }
 

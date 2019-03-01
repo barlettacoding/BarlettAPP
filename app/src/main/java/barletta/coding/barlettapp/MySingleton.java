@@ -13,6 +13,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+
 //Questa classe è stata creata seguendo il codice della developer guide di android.
 //Serve a gestire le richieste in modo efficiente per applicazioni che rimangono costantamente connesse ad internet
 public class MySingleton {
@@ -61,16 +62,16 @@ public class MySingleton {
     }
 
     //Locali e immagini
-    public RequestQueue getRequestQueueImage(){
+    public RequestQueue getRequestQueueImage() {
 
-        if(requestQueue == null){
+        if (requestQueue == null) {
             Cache cache = new DiskBasedCache(ctx.getCacheDir(), 10 * 1024 * 1024);
             Network network = new BasicNetwork(new HurlStack());
             requestQueue = new RequestQueue(cache, network);
             requestQueue.start();
         }
 
-        return  requestQueue;
+        return requestQueue;
 
     }
 

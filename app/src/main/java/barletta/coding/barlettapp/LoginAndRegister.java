@@ -41,9 +41,9 @@ public class LoginAndRegister extends AppCompatActivity {
         questa Activity si interrompe con il metodo finish() e
         passiamo subito all'activity dell'homePage.
          */
-        if(SharedPrefManager.getInstance(this).isLogged()){
+        if (SharedPrefManager.getInstance(this).isLogged()) {
             finish();
-            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             return;
         }
         inizializeComponent();
@@ -52,7 +52,7 @@ public class LoginAndRegister extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(LoginAndRegister.this,RegisterActivity.class));
+                startActivity(new Intent(LoginAndRegister.this, RegisterActivity.class));
 
             }
         });
@@ -66,7 +66,7 @@ public class LoginAndRegister extends AppCompatActivity {
         broadCastCallFromRegister();
     }
 
-    public void inizializeComponent(){
+    public void inizializeComponent() {
 
         this.username = findViewById(R.id.editTextUsername);
         this.password = findViewById(R.id.editTextPassword);
@@ -78,7 +78,7 @@ public class LoginAndRegister extends AppCompatActivity {
 
     }
 
-    private void userLogin(){
+    private void userLogin() {
         final String username = this.username.getText().toString().trim();
         final String password = this.password.getText().toString().trim();
         String urlLogin = "http://barlettacoding.altervista.org/login.php";
@@ -91,19 +91,19 @@ public class LoginAndRegister extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             //Modificare il messaggio di errore. Fare la stringa
-                            if(!jsonObject.getBoolean("error")){//Da qui ci muoviamo alla prossima activity
+                            if (!jsonObject.getBoolean("error")) {//Da qui ci muoviamo alla prossima activity
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(jsonObject.getInt("id"),
-                                        jsonObject.getString("username"),jsonObject.getString("email"), jsonObject.getInt("tipo"));
-                                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                                        jsonObject.getString("username"), jsonObject.getString("email"), jsonObject.getInt("tipo"));
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                                 finish();
-                            }else{
+                            } else {
                                 //Modificare il messaggio di errore. fare la stringa
-                                Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -112,38 +112,38 @@ public class LoginAndRegister extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.hide();
-                        Toast.makeText(getApplicationContext(),getString(R.string.toastErrorRegistration), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.toastErrorRegistration), Toast.LENGTH_SHORT).show();
                     }
-                }){
+                }) {
             //Qui mettiamo i parametri che dobbiamo passare al php
             //Per fare il login passiamo al php l'username e la password
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username",username);
-                params.put("password",password);
+                params.put("username", username);
+                params.put("password", password);
                 return params;
             }
         };
         //Controlliamo se l'utente a messo i dati. Se non li ha messi, non lo facciamo neanche andare avanti
-        if(username.isEmpty() || password.isEmpty()){
+        if (username.isEmpty() || password.isEmpty()) {
             progressDialog.hide();
-            if(username.isEmpty()){
+            if (username.isEmpty()) {
                 this.username.setError(getString(R.string.missingUsername));
             }
-            if(password.isEmpty()){
+            if (password.isEmpty()) {
                 this.password.setError(getString(R.string.missingPassword));
             }
         }
         //Se li ha messi, chiamamo la requestQueue e gli passiamo la stringRequest che contiene i dati per il login
-        else{
+        else {
             MySingleton.getInstance(this).addToRequestQueue(stringRequest);
         }
 
 
     }
 
-    public void broadCastCallFromRegister(){
+    public void broadCastCallFromRegister() {
         BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
 
             @Override

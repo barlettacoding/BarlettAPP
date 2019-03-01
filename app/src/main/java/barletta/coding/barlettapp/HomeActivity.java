@@ -25,11 +25,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -37,7 +39,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,6 +58,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     BottomNavigationView bottomNavigation; //BottomNavigation bar. Dobbiamo nascondere l'activity
 
     String request_url = "http://barlettacoding.altervista.org/getImmagini.php";
+    Button confirmDelete, cancelDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -290,7 +295,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         registerReceiver(broadcast_reciever, new IntentFilter("finish"));
     }
 
-
     public void setActionBar(Boolean setting) {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(setting);
@@ -301,6 +305,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_layout, null);
 
+        confirmDelete = popupView.findViewById(R.id.buttonDelete);
+        cancelDelete = popupView.findViewById(R.id.buttonCancelD);
         //creazione popup
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -309,15 +315,64 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         //mostra popup
         popup.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-        //annulla popup
-        /*popupView.setOnTouchListener(new View.OnTouchListener() {
+        
+        confirmDelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popup.dismiss();
-                return true;
+            public void onClick(View v) {
+                deleteAccountRequest();
+                //Continuare verso le cose
+                SharedPrefManager.getInstance(getApplicationContext()).logout();
+                startActivity(new Intent(getApplicationContext(), LoginAndRegister.class));
+                finish();
             }
-        });*/
+
+        });
+
+        cancelDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.dismiss();
+            }
+        });
 
     }
+
+    public void deleteAccountRequest() {
+
+        String urlDelete = "http://barlettacoding.altervista.org/DeleteUser.php";
+
+        int ID = SharedPrefManager.getInstance(this).getId();
+        final String idToString = Integer.toString(ID);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlDelete, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Toast.makeText(getApplicationContext(), "Account cancellato", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(), "Errore cancellazione", Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+
+                params.put("ID", idToString);
+
+                return params;
+            }
+        };
+
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+    }
+
 }

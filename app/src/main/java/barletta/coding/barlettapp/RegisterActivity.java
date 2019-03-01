@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void registerUser(){
+    private void registerUser() {
 
         String urlRegister = "http://barlettacoding.altervista.org/registrazione.php";
 
@@ -67,19 +67,19 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Toast.makeText(getApplicationContext(),"Registrato con successo",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Registrato con successo", Toast.LENGTH_SHORT).show();
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(jsonObject.getInt("id"),
-                                    jsonObject.getString("username"),jsonObject.getString("email"), jsonObject.getInt("tipo"));
-                            if(SharedPrefManager.getInstance(getApplicationContext()).isLogged()){
+                                    jsonObject.getString("username"), jsonObject.getString("email"), jsonObject.getInt("tipo"));
+                            if (SharedPrefManager.getInstance(getApplicationContext()).isLogged()) {
 
                                 finishLoginActivity();
                                 finish();
-                                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                                 return;
                             }
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -88,15 +88,15 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.hide();
-                        Toast.makeText(getApplicationContext(),getString(R.string.toastErrorRegistration), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.toastErrorRegistration), Toast.LENGTH_SHORT).show();
                     }
-                }){
+                }) {
             //Qui mettiamo i parametri che dobbiamo passare al php
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username",username);
-                params.put("password",password);
+                params.put("username", username);
+                params.put("password", password);
                 params.put("email", email);
 
                 return params;
@@ -106,26 +106,23 @@ public class RegisterActivity extends AppCompatActivity {
         //RequestQueue requestQ = Volley.newRequestQueue(this);
         //requestQ.add(stringRequest);
 
-        if(username.isEmpty() || password.isEmpty() || email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (username.isEmpty() || password.isEmpty() || email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             progressDialog.hide();
-            Toast.makeText(getApplicationContext(),"Missing Field",Toast.LENGTH_SHORT).show();
-            if(username.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Missing Field", Toast.LENGTH_SHORT).show();
+            if (username.isEmpty()) {
                 usernameR.setError(getString(R.string.missingUsername));
             }
-            if(email.isEmpty()){
+            if (email.isEmpty()) {
                 emailR.setError(getString(R.string.missingEmail));
             }
-            if(password.isEmpty()){
+            if (password.isEmpty()) {
                 passwordR.setError(getString(R.string.missingPassword));
             }
 
-        }
-        else if(!confPassw.equals(password)){
+        } else if (!confPassw.equals(password)) {
             progressDialog.hide();
             confPassword.setError(getString(R.string.passwordNotMatch));
-        }
-
-        else {
+        } else {
             MySingleton.getInstance(this).addToRequestQueue(stringRequest);
         }
 
@@ -133,8 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
-    public void inizializeComponent(){
+    public void inizializeComponent() {
 
         this.usernameR = findViewById(R.id.editTextUsernameR);
         this.passwordR = findViewById(R.id.editTextPasswordR);
@@ -144,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
     }
 
-    public void finishLoginActivity(){
+    public void finishLoginActivity() {
         Intent intent = new Intent("finish");
         sendBroadcast(intent);
         finish();
