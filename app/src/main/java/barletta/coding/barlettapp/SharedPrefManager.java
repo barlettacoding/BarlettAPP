@@ -3,6 +3,12 @@ package barletta.coding.barlettapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /*In questa classe usiamo le sharedPreference per salvare le credenziali dell'utente
 che ha fatto il login. Di regola si tengono salvate nel telefono. Nelle sharedPreferences dell'app
@@ -13,10 +19,13 @@ public class SharedPrefManager {
     private static Context ctx;
 
     private static final String SHARED_PREF_NAME = "mysharedpref";
+
     private static final String KEY_USERNAME = "username";
     private static final String KEY_USER_MAIL = "useremail";
     private static final String KEY_USER_ID = "usereid";
     private static final String KEY_USER_TIPO = "usertipo";
+    private static final String KEY_LIST_DIARY = "keyDiary";
+    ArrayList<diaryObject> LIST_DIARY = UserDiaryList.diaryList;
 
     private SharedPrefManager(Context context) {
         ctx = context;
@@ -43,6 +52,27 @@ public class SharedPrefManager {
         editor.apply();
         return true;
     }
+
+    public boolean saveListDiary(ArrayList<diaryObject> diaryList){
+        SharedPreferences sharedPref = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(diaryList);
+        editor.putString(KEY_LIST_DIARY,json);
+        editor.commit();
+
+        return true;
+    }
+
+    public ArrayList<diaryObject> loadList(){
+        SharedPreferences sharedPref = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String response = sharedPref.getString(KEY_LIST_DIARY,"");
+        ArrayList<diaryObject> listToLoad = gson.fromJson(response, new TypeToken<List<diaryObject>>(){}.getType());
+        return listToLoad;
+    }
+
+
 
     //Ci serve a vedere se l'utente è loggato
     public boolean isLogged() {

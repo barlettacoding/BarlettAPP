@@ -5,24 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Slide;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -69,6 +65,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         if (!SharedPrefManager.getInstance(this).isLogged()) {
             finish();
             startActivity(new Intent(this, LoginAndRegister.class));
+
         }
 
         broadCastCallFromUser();
@@ -137,7 +134,11 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 Toast.makeText(this, "Preferiti", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.navigation_diary:
-                Toast.makeText(this, "Diario", Toast.LENGTH_SHORT).show();
+                fragment = new UserDiaryList();
+                hideClasseObject();
+                titleActioBar="Diary";
+                setActionBar(true);
+                getSupportActionBar().setTitle(titleActioBar);
                 break;
 
         }
@@ -349,6 +350,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             public void onResponse(String response) {
 
                 Toast.makeText(getApplicationContext(), "Account cancellato", Toast.LENGTH_SHORT).show();
+
 
             }
 
