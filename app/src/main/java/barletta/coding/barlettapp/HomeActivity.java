@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     BottomNavigationView bottomNavigation; //BottomNavigation bar. Dobbiamo nascondere l'activity
 
     String request_url = "http://barlettacoding.altervista.org/getImmagini.php";
-    Button confirmDelete, cancelDelete;
+    Button confirmDelete, cancelDelete, btHotel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +105,14 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         });
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
+
+        btHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),CategoryListActivity.class));
+
+            }
+        });
 
 
     }
@@ -278,6 +286,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigation = findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(this);
+        btHotel = findViewById(R.id.buttonHotel);
     }
 
     //BroadCast per finire l'activity

@@ -3,7 +3,7 @@ package barletta.coding.barlettapp;
 public class Locale {
 
     private int ID, idGestore;
-    private String nome, descrizione;
+    private String nome, descrizione, immagine;
 
     public int getID() {
         return ID;
@@ -35,5 +35,13 @@ public class Locale {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public String getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
     }
 }

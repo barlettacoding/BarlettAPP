@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <Button
+        android:id="@+id/buttonHotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentView"
+        app:layout_constraintStart_toStartOf="@+id/fragmentView"
+        app:layout_constraintTop_toTopOf="@+id/SliderDots" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/slideShowHome"
         android:layout_width="0dp"
@@ -53,8 +63,10 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/slideShowHome">
+        app:layout_constraintTop_toTopOf="@+id/slideShowHome"
+        app:layout_constraintVertical_bias="1.0">
 
     </FrameLayout>
 

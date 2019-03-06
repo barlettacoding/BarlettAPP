@@ -23,5 +23,6 @@
     <string name="buttonDeleteAccount">Delete Account</string>
     <string name="buttonProfileLogout">Logout</string>
     <string name="buttonCancel">Cancel</string>
+    <string name="textViewNomeLocaleLista">Nome</string>
 
 </resources>
