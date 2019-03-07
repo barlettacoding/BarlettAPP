@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -109,7 +110,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         btHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CategoryListActivity.class));
+
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragmentView, new CategoryListActivity())
+                        .commit();
+                hideClasseObject();
 
             }
         });
@@ -174,12 +180,14 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         viewPager.setVisibility(View.GONE);
         sliderDotspanel.setVisibility(View.GONE);
+        btHotel.setVisibility(View.GONE);
 
     }
 
     private void showClassObject() {
         viewPager.setVisibility(View.VISIBLE);
         sliderDotspanel.setVisibility(View.VISIBLE);
+        btHotel.setVisibility(View.VISIBLE);
     }
 
     public class MyTimerTask extends TimerTask {

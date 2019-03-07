@@ -2,8 +2,14 @@ package barletta.coding.barlettapp;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,32 +24,33 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CategoryListActivity extends AppCompatActivity {
+public class CategoryListActivity extends Fragment {
 
     private ListView listViewCategoryList;
     private CustomArrayAdapterCategoryList categoryAdapter;
     private static ArrayList<Locale> lista = new ArrayList<>();
 
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.activity_category_list, null);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_list);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
 
         sendRequestGetLocal();
 
-        listViewCategoryList = findViewById(R.id.listViewCategoryList);
-        categoryAdapter=new CustomArrayAdapterCategoryList(this,lista);
+        listViewCategoryList = getView().findViewById(R.id.listViewCategoryList);
+        categoryAdapter=new CustomArrayAdapterCategoryList(getActivity(),lista);
         listViewCategoryList.setAdapter(categoryAdapter);
 
 
     }
-
-    public static Context getContext(){
-        return CategoryListActivity.getContext();
-    }
-
 
 
     public void sendRequestGetLocal(){
@@ -90,7 +97,7 @@ public class CategoryListActivity extends AppCompatActivity {
         //rq.add(jSARequest);
 
 
-        MySingleton.getInstance(this).addToRequestQueue(jSARequest);
+        MySingleton.getInstance(getActivity()).addToRequestQueue(jSARequest);
 
     }
 }

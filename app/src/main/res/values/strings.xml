@@ -24,5 +24,8 @@
     <string name="buttonProfileLogout">Logout</string>
     <string name="buttonCancel">Cancel</string>
     <string name="textViewNomeLocaleLista">Nome</string>
+    <string name="description_text">Description</string>
+    <string name="title_text">Title</string>
+    <string name="save_text">Save</string>
 
 </resources>

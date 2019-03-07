@@ -21,10 +21,10 @@ import java.io.ByteArrayOutputStream;
 public class UserAddDiaryFragment extends Fragment {
 
 
-    Button buttoncamera, buttonSave;
-    ImageView cameraView;
-    EditText titleText, descText;
-    Bitmap bitmap;
+    private Button buttoncamera, buttonSave;
+    private ImageView cameraView;
+    private EditText titleText, descText;
+    private Bitmap bitmap;
     public diaryObject addToDiary;
 
 
