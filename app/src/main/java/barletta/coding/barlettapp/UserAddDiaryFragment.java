@@ -1,5 +1,6 @@
 package barletta.coding.barlettapp;
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.io.ByteArrayOutputStream;
 
 
@@ -24,6 +29,7 @@ public class UserAddDiaryFragment extends Fragment {
     private Button buttoncamera, buttonSave;
     private ImageView cameraView;
     private EditText titleText, descText;
+    private TextView maxCharTextDesc, maxCharTextTitle;
     private Bitmap bitmap;
     public diaryObject addToDiary;
 
@@ -40,8 +46,6 @@ public class UserAddDiaryFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         getPhoto();
         inizializeComponent();
-
-
 
         buttoncamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,17 +73,64 @@ public class UserAddDiaryFragment extends Fragment {
 
     public void inizializeComponent(){
 
+        maxCharTextDesc = getView().findViewById(R.id.textViewLiveCharDesc);
+        maxCharTextTitle = getView().findViewById(R.id.textViewMaxCharTitle);
         buttoncamera = getView().findViewById(R.id.buttonCamera);
         cameraView = getView().findViewById(R.id.imageViewCameraTest);
         titleText = getView().findViewById(R.id.editTextTitle);
+        titleText.addTextChangedListener(myTextWatcherTitle);
         descText = getView().findViewById(R.id.editTextDescription);
+        descText.addTextChangedListener(myTextWatcherDesc);
         buttonSave = getView().findViewById(R.id.buttonSave);
         cameraView.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
         descText.setVisibility(View.GONE);
         buttonSave.setVisibility(View.GONE);
 
+
     }
+
+
+    //MOSTRARE QUANTE LETTERE HO INSERITO NELLA DESCRIZIONE
+    private final TextWatcher myTextWatcherDesc = new TextWatcher(){
+
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            maxCharTextDesc.setText(String.valueOf(descText.length())+" /200");
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+
+    //MOSTRARE QUANTE LETTERE HO INSERITO NEL TITOLO
+    private final TextWatcher myTextWatcherTitle = new TextWatcher(){
+
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            maxCharTextTitle.setText(String.valueOf(titleText.length())+" /50");
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
