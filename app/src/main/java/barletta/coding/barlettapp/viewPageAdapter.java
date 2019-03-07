@@ -58,6 +58,7 @@ public class viewPageAdapter extends PagerAdapter {
 
         if (position == 0) {
             nomeLocale.setText(HomeActivity.localiTendenza[0].getNome());
+
         } else if (position == 1) {
 
             nomeLocale.setText(HomeActivity.localiTendenza[1].getNome());
@@ -81,9 +82,9 @@ public class viewPageAdapter extends PagerAdapter {
             public void onClick(View v) {
                 if (position == 0) {
                     //FAI ROBE
-                    Toast.makeText(context, "Loli 1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, HomeActivity.localiTendenza[0].getNome(), Toast.LENGTH_SHORT).show();
                 } else if (position == 1) {
-                    Toast.makeText(context, "Loli 2", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, HomeActivity.localiTendenza[1].getNome(), Toast.LENGTH_SHORT).show();
                 } else if (position == 2) {
                     Toast.makeText(context, "Loli 3", Toast.LENGTH_SHORT).show();
                 } else if (position == 3) {

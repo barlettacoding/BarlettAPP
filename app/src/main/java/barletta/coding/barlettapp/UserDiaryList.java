@@ -45,6 +45,7 @@ public class UserDiaryList extends Fragment {
                 manager.beginTransaction()
                         .replace(R.id.fragmentView,fragment)
                         .commit();
+
             }
         });
 

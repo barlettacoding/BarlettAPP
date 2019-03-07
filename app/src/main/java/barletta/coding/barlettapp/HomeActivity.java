@@ -1,5 +1,6 @@
 package barletta.coding.barlettapp;
 
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +43,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, Runnable {
 
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
@@ -73,11 +74,15 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         inizializeComponent();
 
+        sendRequestGetLocal();
+
         rq = Volley.newRequestQueue(this);
 
         sliderImg = new ArrayList<>();
 
         viewPager = findViewById(R.id.slideShowHome);
+
+
 
         sliderDotspanel = findViewById(R.id.SliderDots);
 
@@ -110,6 +115,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         btHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 FragmentManager manager = getSupportFragmentManager();
                 manager.beginTransaction()
@@ -188,6 +194,13 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         viewPager.setVisibility(View.VISIBLE);
         sliderDotspanel.setVisibility(View.VISIBLE);
         btHotel.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void run() {
+
+
+
     }
 
     public class MyTimerTask extends TimerTask {
@@ -391,6 +404,55 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         };
 
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+    }
+
+    public void sendRequestGetLocal(){
+
+        String urlRequest="http://barlettacoding.altervista.org/getImmagini.php";
+
+
+
+        JsonArrayRequest jSARequest = new JsonArrayRequest(Request.Method.GET, urlRequest, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+
+
+                        for(int i=0;i<response.length();i++) {
+
+                            Locale locale = new Locale();
+
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                locale.setID(jsonObject.getInt("ID"));
+                                locale.setNome(jsonObject.getString("nome"));
+                                locale.setDescrizione(jsonObject.getString("descrizione"));
+                                locale.setIdGestore(jsonObject.getInt("idGestore"));
+                                locale.setImmagine(jsonObject.getString("immagine"));
+
+                                CategoryListActivity.lista.add(locale);
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        //rq.add(jSARequest);
+
+
+        MySingleton.getInstance(this).addToRequestQueue(jSARequest);
 
     }
 
