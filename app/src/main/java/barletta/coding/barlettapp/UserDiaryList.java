@@ -3,26 +3,31 @@ package barletta.coding.barlettapp;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 public class UserDiaryList extends Fragment {
-
+    private ConstraintLayout layout;
     private Button addToDiary;
     private ListView diaryListView;
     private CustomArrayAdapterDiary diaryAdapter;
-
+    public diaryObject diaryToOpen;
     public static ArrayList<diaryObject> diaryList;
 
     @Nullable
@@ -43,9 +48,22 @@ public class UserDiaryList extends Fragment {
                 Fragment fragment = new UserAddDiaryFragment();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction()
-                        .replace(R.id.fragmentView,fragment)
+                        .replace(R.id.fragmentView, fragment)
                         .commit();
 
+            }
+        });
+
+        diaryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                diaryToOpen = (diaryObject)parent.getItemAtPosition(position);
+                OpenDiaryFragment.setDiaryObject(diaryToOpen);
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragmentView,new OpenDiaryFragment())
+                        .commit();
             }
         });
 
@@ -63,6 +81,8 @@ public class UserDiaryList extends Fragment {
         diaryListView = getView().findViewById(R.id.listViewDiary);
         diaryAdapter = new CustomArrayAdapterDiary(getActivity(),diaryList);
         diaryListView.setAdapter(diaryAdapter);
+
+        layout = getView().findViewById(R.id.constraintDiaryList);
     }
 
 
