@@ -1,6 +1,8 @@
 package barletta.coding.barlettapp;
 
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -19,8 +21,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class UserAddDiaryFragment extends Fragment {
@@ -33,6 +39,7 @@ public class UserAddDiaryFragment extends Fragment {
     private Bitmap bitmap;
     public diaryObject addToDiary;
 
+    private DiaryDbHelper dbHelper = null;
 
     @Nullable
     @Override
@@ -45,6 +52,7 @@ public class UserAddDiaryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getPhoto();
+        dbHelper = new DiaryDbHelper(getActivity(),null,null, 1);
         inizializeComponent();
 
         buttoncamera.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +66,6 @@ public class UserAddDiaryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setTitleDescription();
-                UserDiaryList.diaryList.add(addToDiary);
-                SharedPrefManager.getInstance(getActivity()).saveListDiary(UserDiaryList.diaryList);
                 Fragment fragment = new UserDiaryList();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction()
@@ -150,9 +156,13 @@ public class UserAddDiaryFragment extends Fragment {
         String title = titleText.getText().toString();
         String description = descText.getText().toString();
 
-        String bitmapEncoded = encodeBitmap();
+        String bitmapEncoded = saveBitmapInternalStorage(bitmap);
 
-        addToDiary = new diaryObject(bitmapEncoded,title,description);
+        diaryObject diaryToAdd = new diaryObject(bitmapEncoded,title,description);
+
+        dbHelper.insertDiary(diaryToAdd,SharedPrefManager.getInstance(getActivity()).getId());
+
+        //addToDiary = new diaryObject(bitmapEncoded,title,description);
 
 
     }
@@ -169,6 +179,32 @@ public class UserAddDiaryFragment extends Fragment {
         byte[] byteBitm = baos.toByteArray();
         String encoded = Base64.encodeToString(byteBitm, Base64.DEFAULT);
         return encoded;
+    }
+
+    public String saveBitmapInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getActivity());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        String photoTitle = titleText.getText().toString().trim();
+        File mypath=new File(directory,photoTitle);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Toast.makeText(getActivity(),mypath.getAbsolutePath(),Toast.LENGTH_LONG).show();
+        return directory.getAbsolutePath();
     }
 
 }

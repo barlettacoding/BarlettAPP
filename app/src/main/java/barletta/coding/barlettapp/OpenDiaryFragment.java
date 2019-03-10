@@ -1,5 +1,6 @@
 package barletta.coding.barlettapp;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class OpenDiaryFragment extends Fragment {
 
@@ -32,10 +37,7 @@ public class OpenDiaryFragment extends Fragment {
 
         inizializeComponent();
 
-
-        byte[] imageAsBytes = Base64.decode(diaryToShow.getPhoto().getBytes(), Base64.DEFAULT);
-        imageDiary.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-
+        imageDiary.setImageBitmap(loadImageFromStorage(diaryToShow.getPhoto(),diaryToShow.getTitle()));
         titleTV.setText(diaryToShow.getTitle().trim());
         descriptionTV.setText(diaryToShow.getDescription().trim());
 
@@ -51,6 +53,22 @@ public class OpenDiaryFragment extends Fragment {
 
     public static void setDiaryObject(diaryObject diaryShow){
         diaryToShow = diaryShow;
+    }
+
+    private Bitmap loadImageFromStorage(String path, String title)
+    {
+
+        Bitmap b = null;
+
+        try {
+            File f=new File(path, title);
+            b = BitmapFactory.decodeStream(new FileInputStream(f));
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        return b;
     }
 
 }

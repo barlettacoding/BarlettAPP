@@ -6,19 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -30,6 +23,8 @@ public class UserDiaryList extends Fragment {
     public diaryObject diaryToOpen;
     public static ArrayList<diaryObject> diaryList;
 
+    DiaryDbHelper db = null;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,6 +34,7 @@ public class UserDiaryList extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        db = new DiaryDbHelper(getActivity(),null,null ,1);
         inizializeComponent();
 
         addToDiary.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +69,7 @@ public class UserDiaryList extends Fragment {
 
     public void inizializeComponent(){
 
-        diaryList = SharedPrefManager.getInstance(getActivity()).loadList();
+        diaryList = db.getListDiary(SharedPrefManager.getInstance(getActivity()).getId());
         if (diaryList == null){
             diaryList = new ArrayList<>();
         }

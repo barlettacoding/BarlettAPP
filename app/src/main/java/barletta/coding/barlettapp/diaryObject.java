@@ -7,6 +7,7 @@ public class diaryObject {
 
     String title, description, photoEncoded;
 
+    public diaryObject(){}
 
     public diaryObject(String photo, String title, String description){
 
@@ -14,6 +15,18 @@ public class diaryObject {
         this.title = title;
         this.description = description;
 
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPhotoEncoded(String photoEncoded) {
+        this.photoEncoded = photoEncoded;
     }
 
     public String getPhoto() {

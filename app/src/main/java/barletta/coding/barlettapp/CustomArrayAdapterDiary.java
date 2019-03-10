@@ -1,6 +1,7 @@
 package barletta.coding.barlettapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Movie;
 import android.support.annotation.LayoutRes;
@@ -20,13 +21,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
 
     private Context mContext;
     private ArrayList<diaryObject> diaryList = new ArrayList<>();
-    private long startClickTime;
+    
     public CustomArrayAdapterDiary(@NonNull Context context, ArrayList<diaryObject> list) {
         super(context, 0 , list);
         mContext = context;
@@ -44,17 +48,32 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
 
         final diaryObject currentDiary = diaryList.get(position);
 
-        ImageView image = (ImageView)listItem.findViewById(R.id.imageViewDiary);
-        byte[] imageAsBytes = Base64.decode(currentDiary.photoEncoded.getBytes(), Base64.DEFAULT);
-        image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+        ImageView image = listItem.findViewById(R.id.imageViewDiary);
 
-        TextView title = (TextView) listItem.findViewById(R.id.textViewDiaryTitle);
+        image.setImageBitmap(loadImageFromStorage(currentDiary.photoEncoded, currentDiary.getTitle()));
+
+        TextView title = listItem.findViewById(R.id.textViewDiaryTitle);
         title.setText(currentDiary.getTitle());
 
-        TextView description = (TextView) listItem.findViewById(R.id.textViewDiaryDescription);
+        TextView description = listItem.findViewById(R.id.textViewDiaryDescription);
         description.setText(currentDiary.getDescription());
 
-
         return listItem;
+    }
+
+    private Bitmap loadImageFromStorage(String path, String title)
+    {
+
+        Bitmap b = null;
+
+        try {
+            File f=new File(path, title);
+            b = BitmapFactory.decodeStream(new FileInputStream(f));
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        return b;
     }
 }
