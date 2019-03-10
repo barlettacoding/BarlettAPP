@@ -3,7 +3,8 @@ package barletta.coding.barlettapp;
 public class diaryObject {
 
 
-    String title, description, photoEncoded;
+    private String title, description, photoEncoded;
+    private int id;
 
     public diaryObject() {
     }
@@ -38,5 +39,13 @@ public class diaryObject {
 
     public String getTitle() {
         return title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

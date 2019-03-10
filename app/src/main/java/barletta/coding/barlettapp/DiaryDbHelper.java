@@ -78,6 +78,7 @@ public class DiaryDbHelper extends SQLiteOpenHelper {
                 diaryAddList.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
                 diaryAddList.setPhotoEncoded(cursor.getString(cursor.getColumnIndex(COLUMN_PHOTOPATH)));
                 diaryAddList.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+                diaryAddList.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
                 diaryList.add(diaryAddList);
             } while (cursor.moveToNext());
 
@@ -86,6 +87,13 @@ public class DiaryDbHelper extends SQLiteOpenHelper {
 
         return diaryList;
 
+    }
+
+    public void deleteFromDiary(int idDelete){
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_ID + " = "+idDelete,null);
+        db.close();
     }
 
 }

@@ -203,7 +203,7 @@ public class UserAddDiaryFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-        Toast.makeText(getActivity(), mypath.getAbsolutePath(), Toast.LENGTH_LONG).show();
+
         return directory.getAbsolutePath();
     }
 

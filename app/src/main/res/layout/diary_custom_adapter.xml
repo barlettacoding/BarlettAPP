@@ -36,4 +36,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageViewDiary"
         app:layout_constraintStart_toEndOf="@+id/imageViewDiary"
         app:layout_constraintTop_toBottomOf="@+id/textViewDiaryTitle" />
+
+    <Button
+        android:id="@+id/buttonDeleteDiaryS"
+        android:layout_width="79dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDiaryDescription"
+        app:layout_constraintStart_toEndOf="@+id/textViewDiaryTitle" />
 </android.support.constraint.ConstraintLayout>

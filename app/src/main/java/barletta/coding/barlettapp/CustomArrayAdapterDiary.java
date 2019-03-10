@@ -1,6 +1,7 @@
 package barletta.coding.barlettapp;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Movie;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +31,8 @@ import java.util.ArrayList;
 public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
 
     private Context mContext;
-    private ArrayList<diaryObject> diaryList = new ArrayList<>();
+    private ArrayList<diaryObject> diaryList;
+    DiaryDbHelper dbHelper = null;
 
     public CustomArrayAdapterDiary(@NonNull Context context, ArrayList<diaryObject> list) {
         super(context, 0, list);
@@ -45,18 +48,36 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.diary_custom_adapter, parent, false);
         }
 
+        dbHelper = new DiaryDbHelper(getContext(),null,null,1);
 
         final diaryObject currentDiary = diaryList.get(position);
 
         ImageView image = listItem.findViewById(R.id.imageViewDiary);
 
-        image.setImageBitmap(loadImageFromStorage(currentDiary.photoEncoded, currentDiary.getTitle()));
+        image.setImageBitmap(loadImageFromStorage(currentDiary.getPhoto(), currentDiary.getTitle()));
 
         TextView title = listItem.findViewById(R.id.textViewDiaryTitle);
         title.setText(currentDiary.getTitle());
 
         TextView description = listItem.findViewById(R.id.textViewDiaryDescription);
         description.setText(currentDiary.getDescription());
+
+        Button buttonDelete = listItem.findViewById(R.id.buttonDeleteDiaryS);
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dbHelper.deleteFromDiary(currentDiary.getId());
+
+                Fragment fragment = new UserDiaryList();
+                FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentView,fragment)
+                        .commit();
+
+            }
+        });
 
         return listItem;
     }
