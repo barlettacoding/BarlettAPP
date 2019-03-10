@@ -29,12 +29,12 @@ public class DiaryDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createQuery = "CREATE TABLE "+TABLE_NAME+" ("+
-                COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                COLUMN_USERID+" INTEGER, "+
-                COLUMN_TITLE+" TEXT, "+
-                COLUMN_DESCRIPTION+" TEXT, "+
-                COLUMN_PHOTOPATH+" TEXT);";
+        String createQuery = "CREATE TABLE " + TABLE_NAME + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USERID + " INTEGER, " +
+                COLUMN_TITLE + " TEXT, " +
+                COLUMN_DESCRIPTION + " TEXT, " +
+                COLUMN_PHOTOPATH + " TEXT);";
 
         db.execSQL(createQuery);
 
@@ -45,42 +45,41 @@ public class DiaryDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertDiary(diaryObject diary, int userID){
+    public void insertDiary(diaryObject diary, int userID) {
 
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_USERID,userID);
-        cv.put(COLUMN_TITLE,diary.getTitle());
-        cv.put(COLUMN_DESCRIPTION,diary.getDescription());
-        cv.put(COLUMN_PHOTOPATH,diary.getPhoto());
+        cv.put(COLUMN_USERID, userID);
+        cv.put(COLUMN_TITLE, diary.getTitle());
+        cv.put(COLUMN_DESCRIPTION, diary.getDescription());
+        cv.put(COLUMN_PHOTOPATH, diary.getPhoto());
 
-        db.insert(TABLE_NAME,null,cv);
+        db.insert(TABLE_NAME, null, cv);
 
         db.close();
 
     }
 
-    public ArrayList<diaryObject> getListDiary(int userID){
+    public ArrayList<diaryObject> getListDiary(int userID) {
         diaryObject diaryAddList;
         ArrayList<diaryObject> diaryList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
 
-        String selectQuery = "SELECT * FROM "+TABLE_NAME+
-                " WHERE "+COLUMN_USERID+" = "+userID+";";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_USERID + " = " + userID + ";";
 
 
-
-        if (DatabaseUtils.queryNumEntries(db ,TABLE_NAME,COLUMN_USERID + " = " +userID,null)>0){
-            Cursor cursor = db.rawQuery(selectQuery,null);
+        if (DatabaseUtils.queryNumEntries(db, TABLE_NAME, COLUMN_USERID + " = " + userID, null) > 0) {
+            Cursor cursor = db.rawQuery(selectQuery, null);
             cursor.moveToFirst();
-            do{
+            do {
                 diaryAddList = new diaryObject();
                 diaryAddList.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
                 diaryAddList.setPhotoEncoded(cursor.getString(cursor.getColumnIndex(COLUMN_PHOTOPATH)));
                 diaryAddList.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
                 diaryList.add(diaryAddList);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
 
             cursor.close();
         }

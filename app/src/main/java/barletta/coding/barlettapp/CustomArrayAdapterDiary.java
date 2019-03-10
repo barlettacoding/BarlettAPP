@@ -30,9 +30,9 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
 
     private Context mContext;
     private ArrayList<diaryObject> diaryList = new ArrayList<>();
-    
+
     public CustomArrayAdapterDiary(@NonNull Context context, ArrayList<diaryObject> list) {
-        super(context, 0 , list);
+        super(context, 0, list);
         mContext = context;
         diaryList = list;
     }
@@ -41,8 +41,8 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
     @Override
     public View getView(int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
-        if(listItem == null){
-            listItem = LayoutInflater.from(mContext).inflate(R.layout.diary_custom_adapter,parent,false);
+        if (listItem == null) {
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.diary_custom_adapter, parent, false);
         }
 
 
@@ -61,17 +61,14 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
         return listItem;
     }
 
-    private Bitmap loadImageFromStorage(String path, String title)
-    {
+    private Bitmap loadImageFromStorage(String path, String title) {
 
         Bitmap b = null;
 
         try {
-            File f=new File(path, title);
+            File f = new File(path, title);
             b = BitmapFactory.decodeStream(new FileInputStream(f));
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return b;

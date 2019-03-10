@@ -1,15 +1,14 @@
 package barletta.coding.barlettapp;
 
-import android.graphics.Bitmap;
-
 public class diaryObject {
 
 
     String title, description, photoEncoded;
 
-    public diaryObject(){}
+    public diaryObject() {
+    }
 
-    public diaryObject(String photo, String title, String description){
+    public diaryObject(String photo, String title, String description) {
 
         this.photoEncoded = photo;
         this.title = title;

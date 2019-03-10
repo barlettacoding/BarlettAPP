@@ -20,10 +20,10 @@ public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
     private ArrayList<Locale> listaLocali;
     private ImageLoader imgLoader;
 
-    public CustomArrayAdapterCategoryList(@NonNull Context mContext, ArrayList<Locale>listaLocali) {
-        super(mContext,0,listaLocali);
-        this.mContext=mContext;
-        this.listaLocali=listaLocali;
+    public CustomArrayAdapterCategoryList(@NonNull Context mContext, ArrayList<Locale> listaLocali) {
+        super(mContext, 0, listaLocali);
+        this.mContext = mContext;
+        this.listaLocali = listaLocali;
 
     }
 
@@ -33,9 +33,9 @@ public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
 
         imgLoader = MySingleton.getInstance(mContext).getImageLoader();
 
-        View listItem= convertView;
-        if(listItem == null){
-            listItem = LayoutInflater.from(mContext).inflate(R.layout.custom_list_category_layout,parent,false);
+        View listItem = convertView;
+        if (listItem == null) {
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.custom_list_category_layout, parent, false);
 
         }
 
@@ -45,7 +45,7 @@ public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
         ImageView immagineLocale = listItem.findViewById(R.id.imageViewLocaleLista);
         imgLoader.get(currentLocale.getImmagine(), ImageLoader.getImageListener(immagineLocale, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
-        TextView nomeLocale= (TextView) listItem.findViewById(R.id.textViewNomeLocaleLista);
+        TextView nomeLocale = (TextView) listItem.findViewById(R.id.textViewNomeLocaleLista);
         nomeLocale.setText(currentLocale.getNome());
 
         TextView descrLocale = (TextView) listItem.findViewById(R.id.textViewDescrizioneLocaleLista);

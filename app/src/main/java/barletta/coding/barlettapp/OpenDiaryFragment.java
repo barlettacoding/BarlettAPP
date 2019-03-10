@@ -37,13 +37,13 @@ public class OpenDiaryFragment extends Fragment {
 
         inizializeComponent();
 
-        imageDiary.setImageBitmap(loadImageFromStorage(diaryToShow.getPhoto(),diaryToShow.getTitle()));
+        imageDiary.setImageBitmap(loadImageFromStorage(diaryToShow.getPhoto(), diaryToShow.getTitle()));
         titleTV.setText(diaryToShow.getTitle().trim());
         descriptionTV.setText(diaryToShow.getDescription().trim());
 
     }
 
-    private void inizializeComponent(){
+    private void inizializeComponent() {
 
         imageDiary = getView().findViewById(R.id.imageViewDiaryShow);
         titleTV = getView().findViewById(R.id.textViewShowDiaryTitle);
@@ -51,21 +51,18 @@ public class OpenDiaryFragment extends Fragment {
 
     }
 
-    public static void setDiaryObject(diaryObject diaryShow){
+    public static void setDiaryObject(diaryObject diaryShow) {
         diaryToShow = diaryShow;
     }
 
-    private Bitmap loadImageFromStorage(String path, String title)
-    {
+    private Bitmap loadImageFromStorage(String path, String title) {
 
         Bitmap b = null;
 
         try {
-            File f=new File(path, title);
+            File f = new File(path, title);
             b = BitmapFactory.decodeStream(new FileInputStream(f));
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return b;

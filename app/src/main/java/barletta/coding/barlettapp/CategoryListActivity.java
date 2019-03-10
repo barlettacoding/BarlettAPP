@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CategoryListActivity extends Fragment{
+public class CategoryListActivity extends Fragment {
 
     private ListView listViewCategoryList;
     private CustomArrayAdapterCategoryList categoryAdapter;
@@ -36,7 +36,6 @@ public class CategoryListActivity extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 
 
         return inflater.inflate(R.layout.activity_category_list, null);
@@ -49,7 +48,7 @@ public class CategoryListActivity extends Fragment{
 
         listViewCategoryList = getView().findViewById(R.id.listViewCategoryList);
 
-        categoryAdapter=new CustomArrayAdapterCategoryList(getActivity(),lista);
+        categoryAdapter = new CustomArrayAdapterCategoryList(getActivity(), lista);
         listViewCategoryList.setAdapter(categoryAdapter);
         listViewCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

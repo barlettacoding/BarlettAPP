@@ -52,7 +52,7 @@ public class UserAddDiaryFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getPhoto();
-        dbHelper = new DiaryDbHelper(getActivity(),null,null, 1);
+        dbHelper = new DiaryDbHelper(getActivity(), null, null, 1);
         inizializeComponent();
 
         buttoncamera.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +69,7 @@ public class UserAddDiaryFragment extends Fragment {
                 Fragment fragment = new UserDiaryList();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction()
-                        .replace(R.id.fragmentView,fragment)
+                        .replace(R.id.fragmentView, fragment)
                         .commit();
 
             }
@@ -77,7 +77,7 @@ public class UserAddDiaryFragment extends Fragment {
 
     }
 
-    public void inizializeComponent(){
+    public void inizializeComponent() {
 
         maxCharTextDesc = getView().findViewById(R.id.textViewLiveCharDesc);
         maxCharTextTitle = getView().findViewById(R.id.textViewMaxCharTitle);
@@ -98,7 +98,7 @@ public class UserAddDiaryFragment extends Fragment {
 
 
     //MOSTRARE QUANTE LETTERE HO INSERITO NELLA DESCRIZIONE
-    private final TextWatcher myTextWatcherDesc = new TextWatcher(){
+    private final TextWatcher myTextWatcherDesc = new TextWatcher() {
 
 
         @Override
@@ -108,7 +108,7 @@ public class UserAddDiaryFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            maxCharTextDesc.setText(String.valueOf(descText.length())+" /200");
+            maxCharTextDesc.setText(String.valueOf(descText.length()) + " /200");
         }
 
         @Override
@@ -119,7 +119,7 @@ public class UserAddDiaryFragment extends Fragment {
 
 
     //MOSTRARE QUANTE LETTERE HO INSERITO NEL TITOLO
-    private final TextWatcher myTextWatcherTitle = new TextWatcher(){
+    private final TextWatcher myTextWatcherTitle = new TextWatcher() {
 
 
         @Override
@@ -129,7 +129,7 @@ public class UserAddDiaryFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            maxCharTextTitle.setText(String.valueOf(titleText.length())+" /50");
+            maxCharTextTitle.setText(String.valueOf(titleText.length()) + " /50");
         }
 
         @Override
@@ -151,29 +151,29 @@ public class UserAddDiaryFragment extends Fragment {
 
     }
 
-    public void setTitleDescription(){
+    public void setTitleDescription() {
 
         String title = titleText.getText().toString();
         String description = descText.getText().toString();
 
         String bitmapEncoded = saveBitmapInternalStorage(bitmap);
 
-        diaryObject diaryToAdd = new diaryObject(bitmapEncoded,title,description);
+        diaryObject diaryToAdd = new diaryObject(bitmapEncoded, title, description);
 
-        dbHelper.insertDiary(diaryToAdd,SharedPrefManager.getInstance(getActivity()).getId());
+        dbHelper.insertDiary(diaryToAdd, SharedPrefManager.getInstance(getActivity()).getId());
 
         //addToDiary = new diaryObject(bitmapEncoded,title,description);
 
 
     }
 
-    public void getPhoto(){
+    public void getPhoto() {
         Intent picIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(picIntent,0);
+        startActivityForResult(picIntent, 0);
 
     }
 
-    public String encodeBitmap(){
+    public String encodeBitmap() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] byteBitm = baos.toByteArray();
@@ -181,13 +181,13 @@ public class UserAddDiaryFragment extends Fragment {
         return encoded;
     }
 
-    public String saveBitmapInternalStorage(Bitmap bitmapImage){
+    public String saveBitmapInternalStorage(Bitmap bitmapImage) {
         ContextWrapper cw = new ContextWrapper(getActivity());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         // Create imageDir
         String photoTitle = titleText.getText().toString().trim();
-        File mypath=new File(directory,photoTitle);
+        File mypath = new File(directory, photoTitle);
 
         FileOutputStream fos = null;
         try {
@@ -203,7 +203,7 @@ public class UserAddDiaryFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-        Toast.makeText(getActivity(),mypath.getAbsolutePath(),Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), mypath.getAbsolutePath(), Toast.LENGTH_LONG).show();
         return directory.getAbsolutePath();
     }
 
