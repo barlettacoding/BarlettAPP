@@ -8,6 +8,7 @@ import android.graphics.Movie;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -76,6 +77,18 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
                         .replace(R.id.fragmentView,fragment)
                         .commit();
 
+            }
+        });
+
+        listItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenDiaryFragment.setDiaryObject(currentDiary);
+                Fragment fragment = new OpenDiaryFragment();
+                FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentView,fragment)
+                        .commit();
             }
         });
 

@@ -162,8 +162,6 @@ public class UserAddDiaryFragment extends Fragment {
 
         dbHelper.insertDiary(diaryToAdd, SharedPrefManager.getInstance(getActivity()).getId());
 
-        //addToDiary = new diaryObject(bitmapEncoded,title,description);
-
 
     }
 
