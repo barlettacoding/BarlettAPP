@@ -96,4 +96,14 @@ public class DiaryDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public String getNumberOfRow(int userID){
+        String queryCount = "SELECT * FROM "+TABLE_NAME+" WHERE "+COLUMN_USERID+" = "+userID+";";
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor mCursosr = db.rawQuery(queryCount,null);
+
+        String number = String.valueOf(mCursosr.getCount());
+        return " ("+number+")";
+    }
+
 }

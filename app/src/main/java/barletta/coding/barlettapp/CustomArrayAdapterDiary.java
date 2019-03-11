@@ -49,6 +49,8 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
             listItem = LayoutInflater.from(mContext).inflate(R.layout.diary_custom_adapter, parent, false);
         }
 
+        final PopupUtil popup = new PopupUtil();
+
         dbHelper = new DiaryDbHelper(getContext(),null,null,1);
 
         final diaryObject currentDiary = diaryList.get(position);
@@ -65,17 +67,26 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
 
         Button buttonDelete = listItem.findViewById(R.id.buttonDeleteDiaryS);
 
+
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                dbHelper.deleteFromDiary(currentDiary.getId());
+                popup.createPopUp(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dbHelper.deleteFromDiary(currentDiary.getId());
 
-                Fragment fragment = new UserDiaryList();
-                FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentView,fragment)
-                        .commit();
+                        Fragment fragment = new UserDiaryList();
+                        FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragmentView,fragment)
+                                .commit();
+                        popup.popUpDismiss();
+                    }
+                },"Vuoi cancellare la foto?",mContext);
+
+
 
             }
         });

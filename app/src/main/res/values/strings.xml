@@ -27,5 +27,7 @@
     <string name="description_text">Description</string>
     <string name="title_text">Title</string>
     <string name="save_text">Save</string>
+    <string name="deleteString">Delete</string>
+    <string name="insertPhotoTitle">Please, insert the title</string>
 
 </resources>

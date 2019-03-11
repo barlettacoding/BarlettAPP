@@ -82,4 +82,6 @@ public class UserDiaryList extends Fragment {
     }
 
 
+
+
 }
