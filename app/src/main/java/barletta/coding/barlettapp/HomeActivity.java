@@ -1,6 +1,5 @@
 package barletta.coding.barlettapp;
 
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +8,19 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -116,11 +120,18 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             @Override
             public void onClick(View v) {
 
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.bounce,R.anim.bounce);
 
                 FragmentManager manager = getSupportFragmentManager();
-                manager.beginTransaction()
+
+                ft.replace(R.id.fragmentView,new CategoryListActivity(),null);
+                ft.commit();
+
+
+                /*manager.beginTransaction()
                         .replace(R.id.fragmentView, new CategoryListActivity())
-                        .commit();
+                        .commit();*/
                 hideClasseObject();
 
             }
@@ -198,8 +209,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void run() {
-
-
 
     }
 
@@ -329,12 +338,13 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     public void setActionBar(Boolean setting) {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(setting);
+
     }
 
     public void createPopup(View view) {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.popup_layout, null);
+        final View popupView = inflater.inflate(R.layout.popup_layout, null);
 
         confirmDelete = popupView.findViewById(R.id.buttonDelete);
         cancelDelete = popupView.findViewById(R.id.buttonCancelD);
@@ -344,8 +354,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         boolean focusable = true;
         final PopupWindow popup = new PopupWindow(popupView, width, height, focusable);
 
+        Animation animation = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        //popup.setAnimationStyle(R.anim.bounce);
         //mostra popup
+        popupView.setAnimation(animation);
         popup.showAtLocation(view, Gravity.CENTER, 0, 0);
+
         
         confirmDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -359,10 +373,28 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         });
 
+        final Animation dismissAnimation = AnimationUtils.loadAnimation(this,R.anim.fadeout);
+        dismissAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                popup.dismiss();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
         cancelDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup.dismiss();
+                popupView.startAnimation(dismissAnimation);
             }
         });
 
@@ -455,5 +487,15 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         MySingleton.getInstance(this).addToRequestQueue(jSARequest);
 
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 }

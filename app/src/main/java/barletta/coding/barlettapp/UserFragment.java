@@ -72,6 +72,7 @@ public class UserFragment extends Fragment {
 
                 ((HomeActivity) getActivity()).createPopup(getView());
 
+
             }
         });
 
