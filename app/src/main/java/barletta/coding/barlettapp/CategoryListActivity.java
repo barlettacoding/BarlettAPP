@@ -26,18 +26,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CategoryListActivity extends Fragment {
 
     private ListView listViewCategoryList;
     private CustomArrayAdapterCategoryList categoryAdapter;
     public static ArrayList<Locale> lista = new ArrayList<>();
+    public static ArrayList<Locale> listToShow = new ArrayList<>();
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 
         return inflater.inflate(R.layout.activity_category_list, null);
 
@@ -49,7 +50,7 @@ public class CategoryListActivity extends Fragment {
 
         listViewCategoryList = getView().findViewById(R.id.listViewCategoryList);
 
-        categoryAdapter = new CustomArrayAdapterCategoryList(getActivity(), lista);
+        categoryAdapter = new CustomArrayAdapterCategoryList(getActivity(), listToShow);
         listViewCategoryList.setAdapter(categoryAdapter);
         listViewCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,6 +68,19 @@ public class CategoryListActivity extends Fragment {
             }
         });
 
+
+    }
+
+    public static void showCorecctList(int tipo){
+
+        Iterator<Locale> listIterator = lista.listIterator();
+
+        while(listIterator.hasNext()){
+            Locale local = listIterator.next();
+            if(local.getTipologia() == tipo){
+                listToShow.add(local);
+            }
+        }
 
     }
 

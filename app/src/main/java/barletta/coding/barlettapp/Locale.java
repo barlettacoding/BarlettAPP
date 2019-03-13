@@ -2,8 +2,24 @@ package barletta.coding.barlettapp;
 
 public class Locale {
 
-    private int ID, idGestore;
-    private String nome, descrizione, immagine;
+    private int ID, idGestore, tipologia;
+    private String nome, descrizione, immagine, descrizioneCompleta;
+
+    public String getDescrizioneCompleta() {
+        return descrizioneCompleta;
+    }
+
+    public void setDescrizioneCompleta(String descrizioneCompleta) {
+        this.descrizioneCompleta = descrizioneCompleta;
+    }
+
+    public int getTipologia() {
+        return tipologia;
+    }
+
+    public void setTipologia(int tipologia) {
+        this.tipologia = tipologia;
+    }
 
     public int getID() {
         return ID;

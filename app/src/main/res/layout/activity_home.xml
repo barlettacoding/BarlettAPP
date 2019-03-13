@@ -8,13 +8,77 @@
 
     <Button
         android:id="@+id/buttonHotel"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/circle_button"
+        android:drawableTop="@drawable/baseline_lock_black_18dp"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentView"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SliderDots" />
+
+    <Button
+        android:id="@+id/buttonCultur"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/circle_button"
+        android:drawableTop="@drawable/baseline_lock_black_18dp"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonHotel"
+        app:layout_constraintEnd_toStartOf="@+id/buttonFun"
+        app:layout_constraintStart_toEndOf="@+id/buttonHotel"
+        app:layout_constraintTop_toTopOf="@+id/buttonHotel" />
+
+    <Button
+        android:id="@+id/buttonFun"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/circle_button"
+        android:drawableTop="@drawable/baseline_lock_black_18dp"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCultur"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonCultur"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/fragmentView"
-        app:layout_constraintStart_toStartOf="@+id/fragmentView"
-        app:layout_constraintTop_toTopOf="@+id/SliderDots" />
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonHotel"
+        app:layout_constraintEnd_toEndOf="@+id/buttonHotel"
+        app:layout_constraintStart_toStartOf="@+id/buttonHotel"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHotel" />
+
+    <TextView
+        android:id="@+id/textViewCultur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/cultureButton"
+        app:layout_constraintEnd_toEndOf="@+id/buttonCultur"
+        app:layout_constraintStart_toStartOf="@+id/buttonCultur"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCultur" />
+
+    <TextView
+        android:id="@+id/textViewFun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/funButton"
+        app:layout_constraintEnd_toEndOf="@+id/buttonFun"
+        app:layout_constraintStart_toStartOf="@+id/buttonFun"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFun" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/slideShowHome"

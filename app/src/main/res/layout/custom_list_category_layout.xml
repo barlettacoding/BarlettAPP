@@ -18,17 +18,16 @@
         android:id="@+id/textViewNomeLocaleLista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textViewNomeLocaleLista"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLocaleLista"
-        tools:layout_editor_absoluteX="146dp" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLocaleLista"
+        tools:layout_editor_absoluteY="24dp" />
 
     <TextView
         android:id="@+id/textViewDescrizioneLocaleLista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="285dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/textViewNomeLocaleLista"
-        app:layout_constraintStart_toStartOf="@+id/textViewNomeLocaleLista"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLocaleLista"
         app:layout_constraintTop_toBottomOf="@+id/textViewNomeLocaleLista" />
 </android.support.constraint.ConstraintLayout>

@@ -1,9 +1,12 @@
 package barletta.coding.barlettapp;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
+import android.opengl.Visibility;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -25,6 +28,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -49,6 +53,7 @@ import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, Runnable {
 
+    ProgressDialog progressD;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     private int dotscount;
@@ -58,14 +63,17 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     List<SliderUtils> sliderImg;
     public static Locale[] localiTendenza; //Inseriamo i dati dei 5 locali di tendenza qui
     BottomNavigationView bottomNavigation; //BottomNavigation bar. Dobbiamo nascondere l'activity
+    TextView Hotel, Culture, Fun;
 
-    String request_url = "http://barlettacoding.altervista.org/getImmagini.php";
-    Button confirmDelete, cancelDelete, btHotel;
+    String request_url = "http://barlettacoding.altervista.org/getListaLocali.php";
+    Button confirmDelete, cancelDelete, btHotel, bCulture, bFun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
 
         //Come prima cosa, vediamo se l'utente è loggato, se no, lo mandiamo al login
         if (!SharedPrefManager.getInstance(this).isLogged()) {
@@ -78,14 +86,13 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         inizializeComponent();
 
-        sendRequestGetLocal();
+        //sendRequestGetLocal();
 
         rq = Volley.newRequestQueue(this);
 
         sliderImg = new ArrayList<>();
 
         viewPager = findViewById(R.id.slideShowHome);
-
 
 
         sliderDotspanel = findViewById(R.id.SliderDots);
@@ -116,24 +123,29 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
+        sendRequestGetLocal();
         btHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.setCustomAnimations(R.anim.bounce,R.anim.bounce);
-
+                CategoryListActivity.showCorecctList(1);
                 FragmentManager manager = getSupportFragmentManager();
-
-                ft.replace(R.id.fragmentView,new CategoryListActivity(),null);
-                ft.commit();
-
-
-                /*manager.beginTransaction()
+                manager.beginTransaction()
                         .replace(R.id.fragmentView, new CategoryListActivity())
-                        .commit();*/
+                        .commit();
                 hideClasseObject();
 
+            }
+        });
+
+        bCulture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryListActivity.showCorecctList(0);
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragmentView, new CategoryListActivity())
+                        .commit();
+                hideClasseObject();
             }
         });
 
@@ -148,6 +160,9 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
+                CategoryListActivity.lista.clear();
+                CategoryListActivity.listToShow.clear();
+                sendRequestGetLocal();
                 fragment = new EmptyFragment();
                 showClassObject();
                 titleActioBar = getString(R.string.app_name);
@@ -167,7 +182,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.navigation_diary:
                 fragment = new UserDiaryList();
                 hideClasseObject();
-                titleActioBar="Diary";
+                titleActioBar = "Diary";
                 setActionBar(true);
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
@@ -198,13 +213,25 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         viewPager.setVisibility(View.GONE);
         sliderDotspanel.setVisibility(View.GONE);
         btHotel.setVisibility(View.GONE);
+        bCulture.setVisibility(View.GONE);
+        bFun.setVisibility(View.GONE);
+        Hotel.setVisibility(View.GONE);
+        Culture.setVisibility(View.GONE);
+        Fun.setVisibility(View.GONE);
 
     }
 
     private void showClassObject() {
+
         viewPager.setVisibility(View.VISIBLE);
         sliderDotspanel.setVisibility(View.VISIBLE);
         btHotel.setVisibility(View.VISIBLE);
+        bCulture.setVisibility(View.VISIBLE);
+        bFun.setVisibility(View.VISIBLE);
+
+        Hotel.setVisibility(View.VISIBLE);
+        Culture.setVisibility(View.VISIBLE);
+        Fun.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -251,10 +278,13 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         localiTendenza = new Locale[5];
 
+        progressD.show();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, request_url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+
+                progressD.dismiss();
 
                 for (int i = 0; i < localiTendenza.length; i++) {
 
@@ -314,9 +344,18 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     public void inizializeComponent() {
 
+
+        Hotel = findViewById(R.id.textViewHotel);
+        Culture = findViewById(R.id.textViewCultur);
+        Fun = findViewById(R.id.textViewFun);
         bottomNavigation = findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(this);
         btHotel = findViewById(R.id.buttonHotel);
+        progressD = new ProgressDialog(this);
+        progressD.setMessage("");
+        bCulture = findViewById(R.id.buttonCultur);
+        bFun = findViewById(R.id.buttonFun);
+
     }
 
     //BroadCast per finire l'activity
@@ -354,13 +393,13 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         boolean focusable = true;
         final PopupWindow popup = new PopupWindow(popupView, width, height, focusable);
 
-        Animation animation = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
         //popup.setAnimationStyle(R.anim.bounce);
         //mostra popup
         popupView.setAnimation(animation);
         popup.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-        
+
         confirmDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -373,7 +412,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         });
 
-        final Animation dismissAnimation = AnimationUtils.loadAnimation(this,R.anim.fadeout);
+        final Animation dismissAnimation = AnimationUtils.loadAnimation(this, R.anim.fadeout);
         dismissAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -407,9 +446,11 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         int ID = SharedPrefManager.getInstance(this).getId();
         final String idToString = Integer.toString(ID);
 
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlDelete, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
 
                 Toast.makeText(getApplicationContext(), "Account cancellato", Toast.LENGTH_SHORT).show();
 
@@ -439,10 +480,9 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-    public void sendRequestGetLocal(){
+    public void sendRequestGetLocal() {
 
-        String urlRequest="http://barlettacoding.altervista.org/getImmagini.php";
-
+        String urlRequest = "http://barlettacoding.altervista.org/getListaLocali.php";
 
 
         JsonArrayRequest jSARequest = new JsonArrayRequest(Request.Method.GET, urlRequest, null,
@@ -451,19 +491,21 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                     public void onResponse(JSONArray response) {
 
 
-
-                        for(int i=0;i<response.length();i++) {
+                        for (int i = 0; i < response.length(); i++) {
 
                             Locale locale = new Locale();
 
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
+
+
                                 locale.setID(jsonObject.getInt("ID"));
                                 locale.setNome(jsonObject.getString("nome"));
                                 locale.setDescrizione(jsonObject.getString("descrizione"));
                                 locale.setIdGestore(jsonObject.getInt("idGestore"));
                                 locale.setImmagine(jsonObject.getString("immagine"));
-
+                                locale.setTipologia(jsonObject.getInt("Tipologia"));
+                                locale.setDescrizioneCompleta(jsonObject.getString("descrizioneCompleta"));
                                 CategoryListActivity.lista.add(locale);
 
 
@@ -487,12 +529,13 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         MySingleton.getInstance(this).addToRequestQueue(jSARequest);
 
     }
+
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             return true;
         }
 

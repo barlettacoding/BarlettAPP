@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -69,6 +70,7 @@ public class LoginAndRegister extends AppCompatActivity {
     public void inizializeComponent() {
 
         this.username = findViewById(R.id.editTextUsername);
+        //this.username.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_account_circle_black_18dp,0,0,0);
         this.password = findViewById(R.id.editTextPassword);
         this.loginButton = findViewById(R.id.buttonLogin);
         this.registerButton = findViewById(R.id.buttonRegister);
