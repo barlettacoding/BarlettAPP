@@ -32,5 +32,6 @@
     <string name="buttonHotel">Hotel</string>
     <string name="cultureButton">Culture</string>
     <string name="funButton">Fun</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

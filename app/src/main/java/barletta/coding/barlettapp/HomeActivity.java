@@ -1,11 +1,13 @@
 package barletta.coding.barlettapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.location.LocationManager;
 import android.opengl.Visibility;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -39,6 +41,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +56,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, Runnable {
+
+    //Variabile per i permessi della posizione
+
 
     ProgressDialog progressD;
     ViewPager viewPager;
@@ -152,6 +159,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -177,7 +186,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
             case R.id.navigation_favourite:
-                Toast.makeText(this, "Preferiti", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Coupon", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.navigation_diary:
                 fragment = new UserDiaryList();
