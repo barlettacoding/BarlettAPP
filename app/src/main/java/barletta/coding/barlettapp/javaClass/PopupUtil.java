@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.javaClass;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -10,6 +10,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import barletta.coding.barlettapp.R;
 
 public class PopupUtil {
 

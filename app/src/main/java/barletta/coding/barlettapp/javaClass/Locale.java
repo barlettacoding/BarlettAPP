@@ -1,8 +1,28 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.javaClass;
 
-public class Locale {
+import java.io.Serializable;
+
+public class Locale implements Serializable {
 
     private int ID, idGestore, tipologia;
+    private double Latitude, Longitude;
+
+    public double getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        Latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        Longitude = longitude;
+    }
+
     private String nome, descrizione, immagine, descrizioneCompleta;
 
     public String getDescrizioneCompleta() {

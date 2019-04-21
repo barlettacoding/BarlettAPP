@@ -15,6 +15,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import barletta.coding.barlettapp.Fragment.OpenDiaryFragment;
+import barletta.coding.barlettapp.Fragment.UserAddDiaryFragment;
+import barletta.coding.barlettapp.javaClass.DiaryDbHelper;
+import barletta.coding.barlettapp.javaClass.SharedPrefManager;
+import barletta.coding.barlettapp.javaClass.diaryObject;
+
 public class UserDiaryList extends Fragment {
     private ConstraintLayout layout;
     private Button addToDiary;

@@ -1,30 +1,20 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import java.util.HashMap;
-import java.util.Map;
+import barletta.coding.barlettapp.HomeActivity;
+import barletta.coding.barlettapp.LoginAndRegister;
+import barletta.coding.barlettapp.R;
+import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 
 public class UserFragment extends Fragment {
 

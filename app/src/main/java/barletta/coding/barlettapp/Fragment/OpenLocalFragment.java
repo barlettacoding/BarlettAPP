@@ -1,6 +1,8 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,32 +12,33 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import barletta.coding.barlettapp.javaClass.Locale;
+import barletta.coding.barlettapp.MySingleton;
+import barletta.coding.barlettapp.R;
+import barletta.coding.barlettapp.SliderUtils;
+import barletta.coding.barlettapp.viewPagerAdapterLocal;
 
 
 public class OpenLocalFragment extends Fragment{
 
+    private Button showOnMap;
     ProgressDialog progress;
     TextView nameLocal, descrizioneLocale;
     LinearLayout sliderDotspanel;
@@ -63,6 +66,17 @@ public class OpenLocalFragment extends Fragment{
         descrizioneLocale = getView().findViewById(R.id.textViewDescrizioneOpenLocal);
         descrizioneLocale.setText(localeS.getDescrizioneCompleta());
         sliderDotspanel = getView().findViewById(R.id.SliderDotsLocal);
+        showOnMap = getView().findViewById(R.id.buttonDirection);
+        showOnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = "http://maps.google.com/maps?daddr=" + localeS.getLatitude() + "," + localeS.getLongitude() + " (" + localeS.getNome() + ")";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                startActivity(intent);
+
+            }
+        });
 
         imageSlider.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

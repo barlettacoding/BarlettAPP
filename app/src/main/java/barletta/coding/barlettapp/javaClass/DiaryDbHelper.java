@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.javaClass;
 
 import android.content.ContentValues;
 import android.content.Context;

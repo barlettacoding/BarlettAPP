@@ -1,24 +1,18 @@
 package barletta.coding.barlettapp;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
-import android.location.LocationManager;
-import android.opengl.Visibility;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -41,8 +35,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,6 +46,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import barletta.coding.barlettapp.Fragment.EmptyFragment;
+import barletta.coding.barlettapp.Fragment.OpenLocalFragment;
+import barletta.coding.barlettapp.Fragment.UserFragment;
+import barletta.coding.barlettapp.javaClass.Locale;
+import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, Runnable {
 
@@ -156,10 +154,26 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("Bundle");
+
+        if (bundle != null){
+            Locale local = (Locale) bundle.getSerializable("Locale");
+            Fragment fragment = new OpenLocalFragment();
+            ((OpenLocalFragment) fragment).setIdLocale(local);
+            FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction()
+                    .replace(R.id.fragmentView,fragment)
+                    .commit();
+            hideClasseObject();
+        }
 
     }
 
 
+    public void openLocalFromMaps(Locale locale){
+
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -515,6 +529,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                                 locale.setImmagine(jsonObject.getString("immagine"));
                                 locale.setTipologia(jsonObject.getInt("Tipologia"));
                                 locale.setDescrizioneCompleta(jsonObject.getString("descrizioneCompleta"));
+                                locale.setLatitude(jsonObject.getDouble("Latitude"));
+                                locale.setLongitude(jsonObject.getDouble("Longitude"));
                                 CategoryListActivity.lista.add(locale);
 
 

@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Fragment;
 
 
 import android.content.Context;
@@ -21,12 +21,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import barletta.coding.barlettapp.javaClass.DiaryDbHelper;
+import barletta.coding.barlettapp.R;
+import barletta.coding.barlettapp.javaClass.SharedPrefManager;
+import barletta.coding.barlettapp.UserDiaryList;
+import barletta.coding.barlettapp.javaClass.diaryObject;
 
 
 public class UserAddDiaryFragment extends Fragment {

@@ -1,33 +1,30 @@
 package barletta.coding.barlettapp;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Movie;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
+import barletta.coding.barlettapp.Fragment.OpenDiaryFragment;
+import barletta.coding.barlettapp.javaClass.DiaryDbHelper;
+import barletta.coding.barlettapp.javaClass.PopupUtil;
+import barletta.coding.barlettapp.javaClass.diaryObject;
 
 public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
 

@@ -1,14 +1,10 @@
 package barletta.coding.barlettapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,17 +14,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import barletta.coding.barlettapp.Fragment.OpenLocalFragment;
+import barletta.coding.barlettapp.javaClass.Locale;
 
 public class CategoryListActivity extends Fragment {
 
@@ -75,12 +65,8 @@ public class CategoryListActivity extends Fragment {
         nearMeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Fragment fragment = new fragmentGoogleMap();
-                FragmentManager fm = getFragmentManager();
-                fm.beginTransaction()
-                        .replace(R.id.fragmentView,fragment)
-                        .commit();*/
-                startActivity(new Intent(getContext(),MapsActivity.class));
+
+                startActivity(new Intent(getContext(), MapsActivityNearMe.class));
             }
         });
 

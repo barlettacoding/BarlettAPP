@@ -14,6 +14,8 @@ import com.android.volley.toolbox.ImageLoader;
 
 import java.util.ArrayList;
 
+import barletta.coding.barlettapp.javaClass.Locale;
+
 public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
 
     private Context mContext;

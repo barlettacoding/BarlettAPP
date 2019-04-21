@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.javaClass;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +8,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import barletta.coding.barlettapp.UserDiaryList;
 
 
 /*In questa classe usiamo le sharedPreference per salvare le credenziali dell'utente
