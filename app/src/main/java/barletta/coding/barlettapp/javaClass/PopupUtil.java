@@ -71,6 +71,7 @@ public class PopupUtil {
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
+        //CIAO
         popup = new PopupWindow(popupView, width, height, focusable);
 
 
