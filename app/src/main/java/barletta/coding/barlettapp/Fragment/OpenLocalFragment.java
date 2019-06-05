@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -33,11 +34,15 @@ import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.MySingleton;
 import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.SliderUtils;
+import barletta.coding.barlettapp.javaClass.PopupUtil;
 import barletta.coding.barlettapp.viewPagerAdapterLocal;
 
 
 public class OpenLocalFragment extends Fragment{
 
+    private RatingBar LocalRate;
+    private PopupUtil popupUtil = new PopupUtil();
+    private Button openRatingBar;
     private Button showOnMap;
     ProgressDialog progress;
     TextView nameLocal, descrizioneLocale;
@@ -67,6 +72,8 @@ public class OpenLocalFragment extends Fragment{
         descrizioneLocale.setText(localeS.getDescrizioneCompleta());
         sliderDotspanel = getView().findViewById(R.id.SliderDotsLocal);
         showOnMap = getView().findViewById(R.id.buttonDirection);
+        LocalRate = getView().findViewById(R.id.ratingBarFissoVoto);
+        setLocalStar();
         showOnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +82,14 @@ public class OpenLocalFragment extends Fragment{
                 intent.setPackage("com.google.android.apps.maps");
                 startActivity(intent);
 
+            }
+        });
+
+        openRatingBar = getView().findViewById(R.id.buttonRatingBar);
+        openRatingBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupUtil.createPopUpRatingBar(localeS.getID(),"Vuoi votare frate?", getContext());
             }
         });
 
@@ -178,5 +193,12 @@ public class OpenLocalFragment extends Fragment{
     public static void setIdLocale(Locale locale){
         localeS = locale;
     }
+
+    public void setLocalStar(){
+        double finaleRate;
+        finaleRate = localeS.getVoto()/localeS.getNumeroVoti();
+        LocalRate.setRating((float)finaleRate);
+    }
+
 
 }

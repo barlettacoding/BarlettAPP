@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Locale implements Serializable {
 
-    private int ID, idGestore, tipologia;
-    private double Latitude, Longitude;
+    private int ID, idGestore, tipologia, numeroVoti;
+    private double Latitude, Longitude, voto;
 
     public double getLatitude() {
         return Latitude;
@@ -79,5 +79,19 @@ public class Locale implements Serializable {
 
     public void setImmagine(String immagine) {
         this.immagine = immagine;
+    }
+
+    public void setVoto(double voto){
+        this.voto = voto;
+    }
+
+    public double getVoto(){return voto;}
+
+    public void setNumeroVoti(int numeroVoti){
+        this.numeroVoti = numeroVoti;
+    }
+
+    public int getNumeroVoti(){
+        return numeroVoti;
     }
 }

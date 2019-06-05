@@ -16,6 +16,8 @@
         android:drawableTop="@drawable/baseline_lock_black_18dp"
         android:gravity="center"
         android:paddingTop="12dp"
+        android:shadowDy="100"
+        android:shadowRadius="60"
         app:layout_constraintEnd_toEndOf="@+id/fragmentView"
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"

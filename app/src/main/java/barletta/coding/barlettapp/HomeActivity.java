@@ -531,6 +531,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                                 locale.setDescrizioneCompleta(jsonObject.getString("descrizioneCompleta"));
                                 locale.setLatitude(jsonObject.getDouble("Latitude"));
                                 locale.setLongitude(jsonObject.getDouble("Longitude"));
+                                locale.setVoto(jsonObject.getDouble("voto"));
+                                locale.setNumeroVoti(jsonObject.getInt("numeroVoti"));
                                 CategoryListActivity.lista.add(locale);
 
 
