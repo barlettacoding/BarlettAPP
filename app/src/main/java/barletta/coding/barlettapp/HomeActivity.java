@@ -68,10 +68,9 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     List<SliderUtils> sliderImg;
     public static Locale[] localiTendenza; //Inseriamo i dati dei 5 locali di tendenza qui
     BottomNavigationView bottomNavigation; //BottomNavigation bar. Dobbiamo nascondere l'activity
-    TextView Hotel, Culture, Fun;
 
     String request_url = "http://barlettacoding.altervista.org/getListaLocali.php";
-    Button confirmDelete, cancelDelete, btHotel, bCulture, bFun;
+    Button confirmDelete, cancelDelete, btHotel, bCulture, bFun, bRelax, bGreenSpace, bGastronomy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,11 +169,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-
-    public void openLocalFromMaps(Locale locale){
-
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -238,23 +232,22 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         btHotel.setVisibility(View.GONE);
         bCulture.setVisibility(View.GONE);
         bFun.setVisibility(View.GONE);
-        Hotel.setVisibility(View.GONE);
-        Culture.setVisibility(View.GONE);
-        Fun.setVisibility(View.GONE);
+        bRelax.setVisibility(View.GONE);
+        bGreenSpace.setVisibility(View.GONE);
+        bGastronomy.setVisibility(View.GONE);
+
 
     }
 
     private void showClassObject() {
-
         viewPager.setVisibility(View.VISIBLE);
         sliderDotspanel.setVisibility(View.VISIBLE);
         btHotel.setVisibility(View.VISIBLE);
         bCulture.setVisibility(View.VISIBLE);
         bFun.setVisibility(View.VISIBLE);
-
-        Hotel.setVisibility(View.VISIBLE);
-        Culture.setVisibility(View.VISIBLE);
-        Fun.setVisibility(View.VISIBLE);
+        bRelax.setVisibility(View.VISIBLE);
+        bGreenSpace.setVisibility(View.VISIBLE);
+        bGastronomy.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -368,9 +361,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     public void inizializeComponent() {
 
 
-        Hotel = findViewById(R.id.textViewHotel);
-        Culture = findViewById(R.id.textViewCultur);
-        Fun = findViewById(R.id.textViewFun);
         bottomNavigation = findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(this);
         btHotel = findViewById(R.id.buttonHotel);
@@ -378,7 +368,9 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         progressD.setMessage("");
         bCulture = findViewById(R.id.buttonCultur);
         bFun = findViewById(R.id.buttonFun);
-
+        bGastronomy = findViewById(R.id.buttonGastronomy);
+        bGreenSpace = findViewById(R.id.buttonGreenSpace);
+        bRelax = findViewById(R.id.buttonRelax);
     }
 
     //BroadCast per finire l'activity
