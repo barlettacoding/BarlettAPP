@@ -1,8 +1,12 @@
 package barletta.coding.barlettapp;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +60,10 @@ public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
         descrLocale.setText(currentLocale.getDescrizione());
 
         RatingBar ratingBarList = listItem.findViewById(R.id.ratingBarList);
+        DrawableCompat.setTint(ratingBarList.getProgressDrawable(), ContextCompat.getColor(mContext, R.color.colorPrimary));
+
         ratingBarList.setRating((float)currentLocale.getVoto()/currentLocale.getNumeroVoti());
+
 
 
 
