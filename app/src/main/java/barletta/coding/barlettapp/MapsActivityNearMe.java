@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,14 +30,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import barletta.coding.barlettapp.Fragment.CategoryListActivity;
 import barletta.coding.barlettapp.javaClass.Locale;
+import barletta.coding.barlettapp.util.MySingleton;
 import barletta.coding.barlettapp.util.findLocal;
 
 public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCallback{

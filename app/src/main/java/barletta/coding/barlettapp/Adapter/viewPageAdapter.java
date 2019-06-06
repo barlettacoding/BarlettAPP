@@ -1,11 +1,9 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +14,11 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 
 import java.util.List;
+
+import barletta.coding.barlettapp.HomeActivity;
+import barletta.coding.barlettapp.R;
+import barletta.coding.barlettapp.util.MySingleton;
+import barletta.coding.barlettapp.util.SliderUtils;
 
 public class viewPageAdapter extends PagerAdapter {
 

@@ -8,56 +8,74 @@
 
     <RelativeLayout
         android:id="@+id/relativeLPopup"
-        android:layout_width="389dp"
-        android:layout_height="254dp"
+        android:layout_width="367dp"
+        android:layout_height="240dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="197dp">
+        tools:layout_editor_absoluteY="211dp">
+
+        <ImageView
+            android:id="@+id/imageViewCorner"
+            android:layout_width="348dp"
+            android:layout_height="220dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="9dp"
+            app:srcCompat="@color/colorWhite" />
 
         <RatingBar
             android:id="@+id/ratingBarGiveRate"
-            android:layout_width="wrap_content"
+            android:layout_width="245dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="75dp"
-            android:layout_marginEnd="74dp"
-            android:layout_marginBottom="135dp" />
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="58dp"
+            android:layout_marginBottom="110dp" />
 
         <Button
             android:id="@+id/buttonCancelUtil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="136dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginEnd="179dp"
+            android:layout_marginBottom="35dp"
             android:layout_toStartOf="@+id/buttonDeleteUtils"
-            android:text="Button" />
+            android:background="@drawable/circle_button"
+            android:drawableBottom="@drawable/round_backspace_white_36dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="4dp"/>
 
         <Button
             android:id="@+id/buttonDeleteUtils"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="39dp"
-            android:layout_marginBottom="52dp"
-            android:text="@string/deleteString" />
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/circle_button"
+            android:drawableBottom="@drawable/round_done_white_36dp"
+            android:paddingBottom="10dp" />
 
         <TextView
             android:id="@+id/textViewPopupMessage"
-            android:layout_width="150dp"
-            android:layout_height="131dp"
+            android:layout_width="343dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="114dp"
-            android:layout_marginEnd="125dp"
-            android:layout_marginBottom="96dp"
-            android:text="TextView" />
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="191dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

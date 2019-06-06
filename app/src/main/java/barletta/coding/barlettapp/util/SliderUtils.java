@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.util;
 
 public class SliderUtils {
 

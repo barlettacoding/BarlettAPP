@@ -1,6 +1,7 @@
 package barletta.coding.barlettapp.javaClass;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import barletta.coding.barlettapp.MySingleton;
+import barletta.coding.barlettapp.util.MySingleton;
 import barletta.coding.barlettapp.R;
 
 public class PopupUtil {
@@ -107,7 +106,8 @@ public class PopupUtil {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, giveRateUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(mContext,"Va bene",Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Grazie!",Toast.LENGTH_LONG).show();
+                popup.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override

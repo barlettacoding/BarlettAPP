@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageViewCameraTest"
-        android:layout_width="216dp"
-        android:layout_height="144dp"
+        android:layout_width="351dp"
+        android:layout_height="202dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -20,12 +20,16 @@
 
     <Button
         android:id="@+id/buttonCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Nuova Foto"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewCameraTest"
-        tools:layout_editor_absoluteX="161dp" />
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="64dp"
+        android:background="@drawable/circle_button"
+        android:drawableBottom="@drawable/round_add_a_photo_white_36dp_1x"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonSave"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextTitle"
@@ -39,7 +43,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCamera" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCameraTest" />
 
     <EditText
         android:id="@+id/editTextDescription"
@@ -58,14 +62,14 @@
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/save_text"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/circle_button"
+        android:drawableBottom="@drawable/round_save_alt_white_36dp"
+        android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
 
     <TextView

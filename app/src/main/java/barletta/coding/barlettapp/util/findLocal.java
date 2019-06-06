@@ -3,7 +3,7 @@ package barletta.coding.barlettapp.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import barletta.coding.barlettapp.CategoryListActivity;
+import barletta.coding.barlettapp.Fragment.CategoryListActivity;
 import barletta.coding.barlettapp.javaClass.Locale;
 
 public class findLocal {

@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
+import barletta.coding.barlettapp.util.MySingleton;
 
 public class LoginAndRegister extends AppCompatActivity {
 

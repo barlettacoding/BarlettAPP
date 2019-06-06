@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,6 +22,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import barletta.coding.barlettapp.Fragment.OpenDiaryFragment;
+import barletta.coding.barlettapp.R;
+import barletta.coding.barlettapp.UserDiaryList;
 import barletta.coding.barlettapp.javaClass.DiaryDbHelper;
 import barletta.coding.barlettapp.javaClass.PopupUtil;
 import barletta.coding.barlettapp.javaClass.diaryObject;

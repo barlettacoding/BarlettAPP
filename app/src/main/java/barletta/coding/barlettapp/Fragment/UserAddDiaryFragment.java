@@ -105,6 +105,7 @@ public class UserAddDiaryFragment extends Fragment {
         titleText.setVisibility(View.GONE);
         descText.setVisibility(View.GONE);
         buttonSave.setVisibility(View.GONE);
+        buttoncamera.setVisibility(View.GONE);
 
 
     }
@@ -161,6 +162,7 @@ public class UserAddDiaryFragment extends Fragment {
         descText.setVisibility(View.VISIBLE);
         buttonSave.setVisibility(View.VISIBLE);
         cameraView.setVisibility(View.VISIBLE);
+        buttoncamera.setVisibility(View.VISIBLE);
 
     }
 
@@ -172,10 +174,6 @@ public class UserAddDiaryFragment extends Fragment {
     }
 
     public String encodeBitmap() {
-
-
-
-
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);

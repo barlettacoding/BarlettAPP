@@ -1,12 +1,15 @@
 package barletta.coding.barlettapp;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -24,7 +27,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -47,11 +49,15 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import barletta.coding.barlettapp.Adapter.viewPageAdapter;
+import barletta.coding.barlettapp.Fragment.CategoryListActivity;
 import barletta.coding.barlettapp.Fragment.EmptyFragment;
 import barletta.coding.barlettapp.Fragment.OpenLocalFragment;
 import barletta.coding.barlettapp.Fragment.UserFragment;
 import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
+import barletta.coding.barlettapp.util.MySingleton;
+import barletta.coding.barlettapp.util.SliderUtils;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, Runnable {
 
@@ -166,6 +172,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                     .commit();
             hideClasseObject();
         }
+
+        checkPermission();
 
     }
 
@@ -560,4 +568,17 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         return super.onKeyDown(keyCode, event);
     }
+
+
+    public void checkPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
+    }
+
 }

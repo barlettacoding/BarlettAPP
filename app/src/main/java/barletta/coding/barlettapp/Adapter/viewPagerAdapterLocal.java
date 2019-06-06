@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 
 import java.util.List;
+
+import barletta.coding.barlettapp.R;
+import barletta.coding.barlettapp.util.MySingleton;
+import barletta.coding.barlettapp.util.SliderUtils;
 
 public class viewPagerAdapterLocal extends PagerAdapter {
 

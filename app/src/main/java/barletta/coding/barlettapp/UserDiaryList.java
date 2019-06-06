@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import barletta.coding.barlettapp.Adapter.CustomArrayAdapterDiary;
 import barletta.coding.barlettapp.Fragment.OpenDiaryFragment;
 import barletta.coding.barlettapp.Fragment.UserAddDiaryFragment;
 import barletta.coding.barlettapp.javaClass.DiaryDbHelper;

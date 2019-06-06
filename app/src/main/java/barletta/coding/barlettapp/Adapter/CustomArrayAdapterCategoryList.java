@@ -1,8 +1,6 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -10,7 +8,6 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -20,7 +17,9 @@ import com.android.volley.toolbox.ImageLoader;
 
 import java.util.ArrayList;
 
+import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.javaClass.Locale;
+import barletta.coding.barlettapp.util.MySingleton;
 
 public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
 

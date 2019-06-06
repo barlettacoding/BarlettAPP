@@ -1,14 +1,18 @@
 package barletta.coding.barlettapp.Fragment;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +34,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import barletta.coding.barlettapp.HomeActivity;
 import barletta.coding.barlettapp.javaClass.Locale;
-import barletta.coding.barlettapp.MySingleton;
+import barletta.coding.barlettapp.util.MySingleton;
 import barletta.coding.barlettapp.R;
-import barletta.coding.barlettapp.SliderUtils;
+import barletta.coding.barlettapp.util.SliderUtils;
 import barletta.coding.barlettapp.javaClass.PopupUtil;
-import barletta.coding.barlettapp.viewPagerAdapterLocal;
+import barletta.coding.barlettapp.Adapter.viewPagerAdapterLocal;
+
+import static android.content.Intent.ACTION_CALL;
 
 
 public class OpenLocalFragment extends Fragment{
@@ -43,7 +50,7 @@ public class OpenLocalFragment extends Fragment{
     private RatingBar LocalRate;
     private PopupUtil popupUtil = new PopupUtil();
     private Button openRatingBar;
-    private Button showOnMap;
+    private Button showOnMap, buttonCall;
     ProgressDialog progress;
     TextView nameLocal, descrizioneLocale;
     LinearLayout sliderDotspanel;
@@ -69,11 +76,22 @@ public class OpenLocalFragment extends Fragment{
         getImageLocal(localeS.getID());
         nameLocal.setText(localeS.getNome());
         descrizioneLocale = getView().findViewById(R.id.textViewDescrizioneOpenLocal);
+        descrizioneLocale.setMovementMethod(new ScrollingMovementMethod());
         descrizioneLocale.setText(localeS.getDescrizioneCompleta());
         sliderDotspanel = getView().findViewById(R.id.SliderDotsLocal);
         showOnMap = getView().findViewById(R.id.buttonDirection);
         LocalRate = getView().findViewById(R.id.ratingBarFissoVoto);
         setLocalStar();
+        buttonCall = getView().findViewById(R.id.buttonCall);
+        buttonCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(ACTION_CALL);
+
+                callIntent.setData(Uri.parse("tel:123456789"));
+                startActivity(callIntent);
+            }
+        });
         showOnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +107,7 @@ public class OpenLocalFragment extends Fragment{
         openRatingBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupUtil.createPopUpRatingBar(localeS.getID(),"Vuoi votare frate?", getContext());
+                popupUtil.createPopUpRatingBar(localeS.getID(),getString(R.string.giveUsFeedback), getContext());
             }
         });
 
@@ -197,8 +215,10 @@ public class OpenLocalFragment extends Fragment{
     public void setLocalStar(){
         double finaleRate;
         finaleRate = localeS.getVoto()/localeS.getNumeroVoti();
+
         LocalRate.setRating((float)finaleRate);
     }
+
 
 
 }

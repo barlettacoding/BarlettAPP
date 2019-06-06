@@ -35,8 +35,11 @@
     <string name="gastronomyButton">Gastronomy</string>
     <string name="relaxButton">Relax</string>
     <string name="greenSpaceButton">Green Space</string>
+    <string name="giveUsFeedback">Give us a feedback!</string>
+    <string name="thanksForFeedback">Thank you!</string>
     <string name="title_activity_maps">Map</string>
     <string name="couponBar">Coupon</string>
+    <string name="deletePhoto">Do you want delete this photo?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

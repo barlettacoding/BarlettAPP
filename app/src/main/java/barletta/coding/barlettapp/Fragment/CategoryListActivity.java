@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.Fragment;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,7 +17,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import barletta.coding.barlettapp.Fragment.OpenLocalFragment;
+import barletta.coding.barlettapp.Adapter.CustomArrayAdapterCategoryList;
+import barletta.coding.barlettapp.MapsActivityNearMe;
+import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.javaClass.Locale;
 
 public class CategoryListActivity extends Fragment {
@@ -51,7 +53,6 @@ public class CategoryListActivity extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Locale locale = (Locale) listViewCategoryList.getItemAtPosition(position);
-                Toast.makeText(getActivity(), locale.getNome(), Toast.LENGTH_SHORT).show();
                 //AGGIUNGERE FRAGMENT PER IL LOCALE. PROPRIO PER IL LOCALE
                 Fragment fragment = new OpenLocalFragment();
                 OpenLocalFragment.setIdLocale(locale);

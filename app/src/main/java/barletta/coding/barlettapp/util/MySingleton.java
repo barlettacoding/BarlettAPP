@@ -1,4 +1,4 @@
-package barletta.coding.barlettapp;
+package barletta.coding.barlettapp.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

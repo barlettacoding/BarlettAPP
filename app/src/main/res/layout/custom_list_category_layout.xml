@@ -23,20 +23,23 @@
         android:id="@+id/textViewNomeLocaleLista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/colorBlack"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLocaleLista"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="@+id/imageViewLocaleLista"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLocaleLista" />
 
     <TextView
         android:id="@+id/textViewDescrizioneLocaleLista"
         android:layout_width="285dp"
         android:layout_height="52dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNomeLocaleLista"
-        tools:layout_editor_absoluteX="16dp" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLocaleLista"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeLocaleLista" />
 
     <RatingBar
         android:id="@+id/ratingBarList"
