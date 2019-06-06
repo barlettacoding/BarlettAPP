@@ -45,6 +45,7 @@ public class CategoryListActivity extends Fragment {
         listViewCategoryList = getView().findViewById(R.id.listViewCategoryList);
 
         categoryAdapter = new CustomArrayAdapterCategoryList(getActivity(), listToShow);
+
         listViewCategoryList.setAdapter(categoryAdapter);
         listViewCategoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

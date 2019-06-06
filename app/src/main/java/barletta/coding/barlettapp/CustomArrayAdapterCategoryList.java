@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -52,6 +54,10 @@ public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
 
         TextView descrLocale = (TextView) listItem.findViewById(R.id.textViewDescrizioneLocaleLista);
         descrLocale.setText(currentLocale.getDescrizione());
+
+        RatingBar ratingBarList = listItem.findViewById(R.id.ratingBarList);
+        ratingBarList.setRating((float)currentLocale.getVoto()/currentLocale.getNumeroVoti());
+
 
 
         return listItem;
