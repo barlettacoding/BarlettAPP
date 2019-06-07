@@ -1,15 +1,13 @@
 package barletta.coding.barlettapp.Fragment;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.method.ScrollingMovementMethod;
@@ -17,11 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,9 +33,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import barletta.coding.barlettapp.HomeActivity;
 import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.util.MySingleton;
@@ -49,10 +50,12 @@ import static android.content.Intent.ACTION_CALL;
 
 public class OpenLocalFragment extends Fragment{
 
+    private EditText editableDescription;
     private RatingBar LocalRate;
     private PopupUtil popupUtil = new PopupUtil();
     private Button openRatingBar;
     private Button showOnMap, buttonCall, changeLocalDescription;
+    private Button saveDescription;
     ProgressDialog progress;
     TextView nameLocal, descrizioneLocale;
     LinearLayout sliderDotspanel;
@@ -84,9 +87,15 @@ public class OpenLocalFragment extends Fragment{
         descrizioneLocale = getView().findViewById(R.id.textViewDescrizioneOpenLocal);
         descrizioneLocale.setMovementMethod(new ScrollingMovementMethod());
         descrizioneLocale.setText(localeS.getDescrizioneCompleta());
+
+        if( SharedPrefManager.getInstance(getActivity()).getTipo() == 2){
+            startManagerLayout();
+        }
+
         sliderDotspanel = getView().findViewById(R.id.SliderDotsLocal);
         showOnMap = getView().findViewById(R.id.buttonDirection);
         LocalRate = getView().findViewById(R.id.ratingBarFissoVoto);
+
         setLocalStar();
         buttonCall = getView().findViewById(R.id.buttonCall);
         buttonCall.setOnClickListener(new View.OnClickListener() {
@@ -117,13 +126,7 @@ public class OpenLocalFragment extends Fragment{
             }
         });
 
-        changeLocalDescription = getView().findViewById(R.id.buttonChangeDescription);
-        changeLocalDescription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeDescription();
-            }
-        });
+
 
         imageSlider.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -235,13 +238,68 @@ public class OpenLocalFragment extends Fragment{
     }
 
     public void changeDescription(){
+        editableDescription.setEnabled(true);
+        saveDescription.setVisibility(View.VISIBLE);
+    }
+
+    public void SaveNewDescription(){
 
         String url = "http://barlettacoding.altervista.org/changeLocalDescription.php";
 
         final String id = Integer.toString(localeS.getID());
-        StringRequest request = new StringRequest()
+        final String newDesciption = editableDescription.getText().toString().trim();
+
+        StringRequest changeDescRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                editableDescription.setEnabled(false);
+                saveDescription.setVisibility(View.GONE);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("ID", id);
+                params.put("descrizioneCompleta", newDesciption);
+                return params;
+            }
+        };
+
+        MySingleton.getInstance(getActivity()).addToRequestQueue(changeDescRequest);
 
     }
+
+    public void startManagerLayout(){
+
+        editableDescription = getView().findViewById(R.id.textViewDescrizioneOpenLocal);
+        editableDescription.setEnabled(false);
+        editableDescription.setText(localeS.getDescrizioneCompleta());
+        changeLocalDescription = getView().findViewById(R.id.buttonChangeDescription);
+        if(localeS.getIdGestore() != SharedPrefManager.getInstance(getActivity()).getId()){
+            changeLocalDescription.setVisibility(View.GONE);
+        }
+
+        changeLocalDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeDescription();
+            }
+        });
+        saveDescription = getView().findViewById(R.id.buttonSaveDescription);
+        saveDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SaveNewDescription();
+            }
+        });
+    }
+
 
 
 }

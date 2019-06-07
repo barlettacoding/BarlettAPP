@@ -40,7 +40,16 @@
     <string name="title_activity_maps">Map</string>
     <string name="couponBar">Coupon</string>
     <string name="deletePhoto">Do you want delete this photo?</string>
-
+    <string name="infoAccount">Account info</string>
+    <string name="tipeAccountString">Type</string>
+    <string name="userType">User</string>
+    <string name="managerType">Manager</string>
+    <string name="becomeManager">become a manager</string>
+    <string name="accountOption">Account option</string>
+    <string name="askForCode">Ask your code</string>
+    <string name="codeExplanation">Inserire spiegazione del codice</string>
+    <string name="changeDescription">Change description</string>
+    <string name="addCoupon">Add coupon</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps_single_locale">Map</string>

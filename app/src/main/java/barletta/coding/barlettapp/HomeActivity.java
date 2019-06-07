@@ -150,7 +150,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         bCulture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategoryListActivity.showCorecctList(0);
+                CategoryListActivity.showCorecctList(2);
                 FragmentManager manager = getSupportFragmentManager();
                 manager.beginTransaction()
                         .replace(R.id.fragmentView, new CategoryListActivity())
@@ -158,6 +158,58 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 hideClasseObject();
             }
         });
+
+
+        bFun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryListActivity.showCorecctList(3);
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragmentView, new CategoryListActivity())
+                        .commit();
+                hideClasseObject();
+            }
+        });
+
+        bGastronomy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryListActivity.showCorecctList(4);
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragmentView, new CategoryListActivity())
+                        .commit();
+                hideClasseObject();
+            }
+        });
+
+        bRelax.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryListActivity.showCorecctList(5);
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragmentView, new CategoryListActivity())
+                        .commit();
+                hideClasseObject();
+            }
+        });
+
+        bGreenSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryListActivity.showCorecctList(6);
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.fragmentView, new CategoryListActivity())
+                        .commit();
+                hideClasseObject();
+            }
+        });
+
+
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("Bundle");
