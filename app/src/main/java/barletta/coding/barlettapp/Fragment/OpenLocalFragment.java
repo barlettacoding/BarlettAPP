@@ -26,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ import java.util.List;
 
 import barletta.coding.barlettapp.HomeActivity;
 import barletta.coding.barlettapp.javaClass.Locale;
+import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.util.MySingleton;
 import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.util.SliderUtils;
@@ -50,7 +52,7 @@ public class OpenLocalFragment extends Fragment{
     private RatingBar LocalRate;
     private PopupUtil popupUtil = new PopupUtil();
     private Button openRatingBar;
-    private Button showOnMap, buttonCall;
+    private Button showOnMap, buttonCall, changeLocalDescription;
     ProgressDialog progress;
     TextView nameLocal, descrizioneLocale;
     LinearLayout sliderDotspanel;
@@ -63,6 +65,10 @@ public class OpenLocalFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        if(SharedPrefManager.getInstance(getActivity()).getTipo() == 2){
+            return inflater.inflate(R.layout.open_local_fragment_manager, null);
+        }
 
         return inflater.inflate(R.layout.open_local_fragment, null);
     }
@@ -111,6 +117,14 @@ public class OpenLocalFragment extends Fragment{
             }
         });
 
+        changeLocalDescription = getView().findViewById(R.id.buttonChangeDescription);
+        changeLocalDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeDescription();
+            }
+        });
+
         imageSlider.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -132,6 +146,7 @@ public class OpenLocalFragment extends Fragment{
 
             }
         });
+
 
 
 
@@ -219,6 +234,14 @@ public class OpenLocalFragment extends Fragment{
         LocalRate.setRating((float)finaleRate);
     }
 
+    public void changeDescription(){
+
+        String url = "http://barlettacoding.altervista.org/changeLocalDescription.php";
+
+        final String id = Integer.toString(localeS.getID());
+        StringRequest request = new StringRequest()
+
+    }
 
 
 }
