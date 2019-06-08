@@ -51,9 +51,11 @@ import java.util.TimerTask;
 
 import barletta.coding.barlettapp.Adapter.viewPageAdapter;
 import barletta.coding.barlettapp.Fragment.CategoryListActivity;
+import barletta.coding.barlettapp.Fragment.CouponFragment;
 import barletta.coding.barlettapp.Fragment.EmptyFragment;
 import barletta.coding.barlettapp.Fragment.OpenLocalFragment;
 import barletta.coding.barlettapp.Fragment.UserFragment;
+import barletta.coding.barlettapp.javaClass.Coupon;
 import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.util.MySingleton;
@@ -134,6 +136,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
 
         sendRequestGetLocal();
+        getCoupon();
+
         btHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,7 +258,11 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
             case R.id.navigation_favourite:
-                Toast.makeText(this, "Coupon", Toast.LENGTH_SHORT).show();
+                fragment = new CouponFragment();
+                hideClasseObject();
+                titleActioBar = "Coupon";
+                setActionBar(true);
+                getSupportActionBar().setTitle(titleActioBar);
                 break;
             case R.id.navigation_diary:
                 fragment = new UserDiaryList();
@@ -631,6 +639,48 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
+    }
+
+    public void getCoupon(){
+
+        String urlRequest = "http://barlettacoding.altervista.org/getListaCoupon.php";
+        CouponFragment.listaCoupon = new ArrayList<>();
+
+        JsonArrayRequest jSARequest = new JsonArrayRequest(Request.Method.GET, urlRequest, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+
+                        for (int i = 0; i < response.length(); i++) {
+
+                            Coupon coupon = new Coupon();
+
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+
+                                coupon.setID(jsonObject.getInt("ID"));
+                                coupon.setIDLocale(jsonObject.getInt("IdLocale"));
+                                coupon.setDescrizione(jsonObject.getString("descrizione"));
+                                coupon.setNomeLocale(jsonObject.getString("NomeLocale"));
+                                CouponFragment.listaCoupon.add(coupon);
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        MySingleton.getInstance(this).addToRequestQueue(jSARequest);
     }
 
 }

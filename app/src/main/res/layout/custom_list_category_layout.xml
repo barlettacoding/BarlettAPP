@@ -20,7 +20,7 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/textViewNomeLocaleLista"
+        android:id="@+id/textViewNomeLocaleCoupon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -39,7 +39,7 @@
         android:layout_marginTop="8dp"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/imageViewLocaleLista"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNomeLocaleLista" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomeLocaleCoupon" />
 
     <RatingBar
         android:id="@+id/ratingBarList"
@@ -49,9 +49,9 @@
         android:layout_marginStart="8dp"
         android:isIndicator="true"
         android:numStars="5"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewNomeLocaleLista"
-        app:layout_constraintStart_toEndOf="@+id/textViewNomeLocaleLista"
-        app:layout_constraintTop_toTopOf="@+id/textViewNomeLocaleLista" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNomeLocaleCoupon"
+        app:layout_constraintStart_toEndOf="@+id/textViewNomeLocaleCoupon"
+        app:layout_constraintTop_toTopOf="@+id/textViewNomeLocaleCoupon" />
 
 
 </android.support.constraint.ConstraintLayout>

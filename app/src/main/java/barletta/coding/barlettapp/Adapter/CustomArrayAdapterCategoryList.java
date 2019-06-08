@@ -52,7 +52,7 @@ public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
         ImageView immagineLocale = listItem.findViewById(R.id.imageViewLocaleLista);
         imgLoader.get(currentLocale.getImmagine(), ImageLoader.getImageListener(immagineLocale, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
 
-        TextView nomeLocale = (TextView) listItem.findViewById(R.id.textViewNomeLocaleLista);
+        TextView nomeLocale = (TextView) listItem.findViewById(R.id.textViewNomeLocaleCoupon);
         nomeLocale.setText(currentLocale.getNome());
 
         TextView descrLocale = (TextView) listItem.findViewById(R.id.textViewDescrizioneLocaleLista);
