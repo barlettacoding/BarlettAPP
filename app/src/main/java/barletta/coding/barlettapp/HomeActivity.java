@@ -257,7 +257,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 setActionBar(true);
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
-            case R.id.navigation_favourite:
+            case R.id.navigation_favourite: //COUPON
                 fragment = new CouponFragment();
                 hideClasseObject();
                 titleActioBar = "Coupon";

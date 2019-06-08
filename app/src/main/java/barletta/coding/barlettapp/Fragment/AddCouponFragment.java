@@ -9,12 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
+import barletta.coding.barlettapp.util.MySingleton;
 
 public class AddCouponFragment extends Fragment {
 
@@ -55,12 +65,38 @@ public class AddCouponFragment extends Fragment {
             }
         }
 
-        final int idLocale = managerLocale.getID();
+        final String idLocale = Integer.toString(managerLocale.getID());
         final String descrizione = description.getText().toString().trim();
         final String nomeLocale = managerLocale.getNome();
-
+        final String idManager = Integer.toString(SharedPrefManager.getInstance(getActivity()).getId());
         //CREARE PHP CHE PRENDE IN POST STE COSE
-        
+
+        String addCouponUrl = "http://barlettacoding.altervista.org/AddCoupon.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST, addCouponUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Toast.makeText(getContext(), "COUPON MESSO", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("IdLocale", idLocale);
+                params.put("Descrizione", descrizione);
+                params.put("NomeLocale", nomeLocale);
+                params.put("IdManager", idManager);
+                return params;
+            }
+        };
+
+        MySingleton.getInstance(getActivity()).addToRequestQueue(request);
+
     }
 
 }

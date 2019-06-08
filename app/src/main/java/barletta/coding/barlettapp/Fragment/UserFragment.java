@@ -34,7 +34,7 @@ import barletta.coding.barlettapp.util.MySingleton;
 public class UserFragment extends Fragment {
 
     TextView name, email, accountType;
-    Button buttonLogout, deleteAccount, changeLocal, buttonAskCode, buttonConfirm;
+    Button buttonLogout, deleteAccount, changeLocal, buttonAskCode, buttonConfirm, addCoupon;
     Locale managerLocale;
     EditText insertCode;
     String correctCode = "865943";
@@ -118,6 +118,20 @@ public class UserFragment extends Fragment {
             }
         });
         if(SharedPrefManager.getInstance(getActivity()).getTipo() == 2){
+
+            addCoupon = getView().findViewById(R.id.buttonAddCoupon);
+
+            addCoupon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    Fragment frag = new AddCouponFragment();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragmentView,frag)
+                            .commit();
+                }
+            });
+
             changeLocal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
