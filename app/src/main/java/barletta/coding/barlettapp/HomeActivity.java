@@ -21,6 +21,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -49,6 +50,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import barletta.coding.barlettapp.Adapter.CustomArrayAdapterDiary;
 import barletta.coding.barlettapp.Adapter.viewPageAdapter;
 import barletta.coding.barlettapp.Fragment.CategoryListActivity;
 import barletta.coding.barlettapp.Fragment.CouponFragment;
@@ -101,6 +103,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         //sendRequestGetLocal();
 
         rq = Volley.newRequestQueue(this);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         sliderImg = new ArrayList<>();
 
@@ -254,21 +258,21 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new UserFragment();
                 hideClasseObject();
                 titleActioBar = getString(R.string.profile_bottom_bar);
-                setActionBar(true);
+                setActionBar(false);
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
             case R.id.navigation_favourite: //COUPON
                 fragment = new CouponFragment();
                 hideClasseObject();
                 titleActioBar = "Coupon";
-                setActionBar(true);
+                setActionBar(false);
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
             case R.id.navigation_diary:
                 fragment = new UserDiaryList();
                 hideClasseObject();
                 titleActioBar = "Diary";
-                setActionBar(true);
+                setActionBar(false);
                 getSupportActionBar().setTitle(titleActioBar);
                 break;
 
@@ -293,7 +297,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-    private void hideClasseObject() {
+    public void hideClasseObject() {
 
         viewPager.setVisibility(View.GONE);
         sliderDotspanel.setVisibility(View.GONE);
@@ -307,7 +311,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-    private void showClassObject() {
+    public void showClassObject() {
         viewPager.setVisibility(View.VISIBLE);
         sliderDotspanel.setVisibility(View.VISIBLE);
         btHotel.setVisibility(View.VISIBLE);
@@ -380,10 +384,17 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                         JSONObject jsonObject = response.getJSONObject(i);
 
                         sliderUtils.setSliderImageUrl(jsonObject.getString("immagine"));
+                        localiTendenza[i].setID(jsonObject.getInt("ID"));
                         localiTendenza[i].setNome(jsonObject.getString("nome"));
                         localiTendenza[i].setDescrizione(jsonObject.getString("descrizione"));
-                        localiTendenza[i].setID(jsonObject.getInt("ID"));
                         localiTendenza[i].setIdGestore(jsonObject.getInt("idGestore"));
+                        localiTendenza[i].setImmagine(jsonObject.getString("immagine"));
+                        localiTendenza[i].setTipologia(jsonObject.getInt("Tipologia"));
+                        localiTendenza[i].setDescrizioneCompleta(jsonObject.getString("descrizioneCompleta"));
+                        localiTendenza[i].setLatitude(jsonObject.getDouble("Latitude"));
+                        localiTendenza[i].setLongitude(jsonObject.getDouble("Longitude"));
+                        localiTendenza[i].setVoto(jsonObject.getDouble("voto"));
+                        localiTendenza[i].setNumeroVoti(jsonObject.getInt("numeroVoti"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -476,7 +487,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         boolean focusable = true;
         final PopupWindow popup = new PopupWindow(popupView, width, height, focusable);
 
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fadein);
         //popup.setAnimationStyle(R.anim.bounce);
         //mostra popup
         popupView.setAnimation(animation);
@@ -619,10 +630,13 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (keyCode == KeyEvent.KEYCODE_BACK && fragmentManager.findFragmentByTag("LOCAL_OPEN").isVisible()) {
+            Fragment frag = new CategoryListActivity();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentView,frag)
+                    .commit();
             return true;
         }
 
@@ -659,10 +673,12 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
 
+
                                 coupon.setID(jsonObject.getInt("ID"));
                                 coupon.setIDLocale(jsonObject.getInt("IdLocale"));
                                 coupon.setDescrizione(jsonObject.getString("descrizione"));
                                 coupon.setNomeLocale(jsonObject.getString("NomeLocale"));
+                                coupon.setIDManager(jsonObject.getInt("IdManager"));
                                 CouponFragment.listaCoupon.add(coupon);
 
 

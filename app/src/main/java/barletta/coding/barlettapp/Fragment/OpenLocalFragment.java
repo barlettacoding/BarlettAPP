@@ -1,5 +1,6 @@
 package barletta.coding.barlettapp.Fragment;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,15 +12,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -37,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import barletta.coding.barlettapp.HomeActivity;
 import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.util.MySingleton;
@@ -65,6 +70,7 @@ public class OpenLocalFragment extends Fragment{
     List<SliderUtils> sliderImg = new ArrayList<>();
     private int dotscount;
     private ImageView[] dots;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,6 +85,9 @@ public class OpenLocalFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ((HomeActivity)getActivity()).setActionBar(false);
+
         progress = new ProgressDialog(getActivity());
         nameLocal = getActivity().findViewById(R.id.TextViewLocalName);
         imageSlider = getActivity().findViewById(R.id.imageLocalSlider);
@@ -299,7 +308,6 @@ public class OpenLocalFragment extends Fragment{
             }
         });
     }
-
 
 
 }

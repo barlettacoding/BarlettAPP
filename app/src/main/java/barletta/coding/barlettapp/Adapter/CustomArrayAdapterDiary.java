@@ -97,7 +97,7 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
                 Fragment fragment = new OpenDiaryFragment();
                 FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentView,fragment)
+                        .replace(R.id.fragmentView,fragment, "OPEN_DIARY")
                         .commit();
             }
         });

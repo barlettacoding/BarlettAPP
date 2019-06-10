@@ -15,7 +15,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="79dp" />
+        tools:layout_editor_absoluteY="63dp" />
 
     <TextView
         android:id="@+id/textViewDescrizioneCoupon"
@@ -28,6 +28,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNomeLocaleCoupon" />
+
+    <Button
+        android:id="@+id/buttonDeleteCoupon"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
+        android:text="@string/deleteCoupon"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescrizioneCoupon" />
 
 
 </android.support.constraint.ConstraintLayout>

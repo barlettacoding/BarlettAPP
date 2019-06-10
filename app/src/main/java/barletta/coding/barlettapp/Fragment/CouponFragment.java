@@ -22,12 +22,14 @@ import barletta.coding.barlettapp.MapsActivityNearMe;
 import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.javaClass.Coupon;
 import barletta.coding.barlettapp.javaClass.Locale;
+import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 
 public class CouponFragment extends Fragment {
 
     private ListView listViewCategoryList;
     private CustomArrayAdapterCoupon categoryAdapter;
     public static ArrayList<Coupon> listaCoupon = new ArrayList<>();
+
 
     @Nullable
     @Override
@@ -48,6 +50,8 @@ public class CouponFragment extends Fragment {
         listViewCategoryList.setAdapter(categoryAdapter);
 
     }
+
+
 
 }
 

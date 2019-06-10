@@ -6,6 +6,15 @@ public class Coupon {
     private int IDLocale;
     private String NomeLocale;
     private String Descrizione;
+    private int IDManager;
+
+    public int getIDManager() {
+        return IDManager;
+    }
+
+    public void setIDManager(int IDManager) {
+        this.IDManager = IDManager;
+    }
 
     public Coupon(){}
 

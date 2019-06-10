@@ -51,6 +51,12 @@
     <string name="changeDescription">Change description</string>
     <string name="addCoupon">Add coupon</string>
     <string name="couponDescriptionTitle">Insert the detail of your coupon</string>
+    <string name="deleteCoupon">Delete Coupon</string>
+    <string name="saveCoupon">Save coupon</string>
+    <string name="gpsAlert">"This application requires GPS to work properly, do you want to enable it?"</string>
+    <string name="delteAccountConfirm">Are you sure?</string>
+    <string name="modifyDescription">Modify description</string>
+    <string name="registerStringLogin">Need an account? Register here</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps_single_locale">Map</string>

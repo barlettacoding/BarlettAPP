@@ -43,7 +43,7 @@ import barletta.coding.barlettapp.util.findLocal;
 
 public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCallback{
 
-    //41.320391, 16.270859 NANULA
+
     private GoogleMap mMap;
     private boolean mLocationPermissionGranted = false;
     private final static int PERMISSIONS_REQUEST_ENABLE_GPS = 9002;
@@ -95,7 +95,7 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("This application requires GPS to work properly, do you want to enable it?")
+        builder.setMessage(getString(R.string.gpsAlert))
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
@@ -187,8 +187,7 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
                 if(location != null){
                     myCurrentPosition = new LatLng(location.getLatitude(),location.getLongitude());
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(myCurrentPosition));
-                    Toast.makeText(getApplicationContext(),"!= NULL",Toast.LENGTH_LONG).show();
-                    mMap.addMarker(new MarkerOptions().position(myCurrentPosition).title("CASA MIA"));
+                    //mMap.addMarker(new MarkerOptions().position(myCurrentPosition).title("CASA MIA"));
 
 
                 }

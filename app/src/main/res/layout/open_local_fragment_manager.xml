@@ -116,13 +116,16 @@
 
     <Button
         android:id="@+id/buttonChangeDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="154dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/textViewDescrizioneOpenLocal"
-        app:layout_constraintTop_toTopOf="@+id/textViewDescrizioneOpenLocal" />
+        android:background="@color/colorAccent"
+        android:text="@string/modifyDescription"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingBarFissoVoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ratingBarFissoVoto"
+        app:layout_constraintTop_toTopOf="@+id/ratingBarFissoVoto" />
 
     <Button
         android:id="@+id/buttonSaveDescription"
@@ -130,7 +133,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="SAVE"
+        android:background="@color/colorAccent"
+        android:text="@string/save_text"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonChangeDescription" />

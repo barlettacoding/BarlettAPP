@@ -58,7 +58,7 @@ public class CategoryListActivity extends Fragment {
                 OpenLocalFragment.setIdLocale(locale);
                 FragmentManager fm = getFragmentManager();
                 fm.beginTransaction()
-                        .replace(R.id.fragmentView,fragment)
+                        .replace(R.id.fragmentView,fragment, "LOCAL_OPEN")
                         .commit();
 
             }

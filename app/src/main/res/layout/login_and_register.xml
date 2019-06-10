@@ -15,6 +15,7 @@
         android:layout_marginEnd="56dp"
         android:drawableLeft="@drawable/baseline_account_circle_black_18dp"
         android:drawablePadding="12dp"
+        android:paddingLeft="10dp"
         android:ems="10"
         android:hint="@string/usernameText"
         android:inputType="textPersonName"
@@ -41,10 +42,11 @@
 
     <Button
         android:id="@+id/buttonRegister"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/buttonRegister"
+        android:layout_marginTop="48dp"
+        android:text="@string/registerStringLogin"
         app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
         app:layout_constraintStart_toStartOf="@+id/buttonLogin"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
@@ -58,6 +60,7 @@
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="8dp"
         android:drawableLeft="@drawable/baseline_lock_black_18dp"
+        android:paddingLeft="10dp"
         android:drawablePadding="12dp"
         android:background="@drawable/round_plain_text"
         android:ems="10"
