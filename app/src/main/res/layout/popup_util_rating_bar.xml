@@ -12,20 +12,10 @@
         android:layout_height="240dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/feedback_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="211dp">
-
-        <ImageView
-            android:id="@+id/imageViewCorner"
-            android:layout_width="348dp"
-            android:layout_height="220dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="9dp"
-            app:srcCompat="@color/colorWhite" />
 
         <RatingBar
             android:id="@+id/ratingBarGiveRate"
@@ -48,8 +38,8 @@
             android:layout_toStartOf="@+id/buttonDeleteUtils"
             android:background="@drawable/circle_button"
             android:drawableBottom="@drawable/round_backspace_white_36dp"
-            android:paddingBottom="10dp"
-            android:paddingRight="4dp"/>
+            android:paddingRight="4dp"
+            android:paddingBottom="10dp" />
 
         <Button
             android:id="@+id/buttonDeleteUtils"
@@ -70,11 +60,12 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="26dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="191dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="195dp"
             android:text="TextView"
             android:textAlignment="center"
+            android:textColor="@color/colorWhite"
             android:textSize="24sp" />
 
     </RelativeLayout>

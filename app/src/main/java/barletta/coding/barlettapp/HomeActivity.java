@@ -65,9 +65,6 @@ import barletta.coding.barlettapp.util.SliderUtils;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, Runnable {
 
-    //Variabile per i permessi della posizione
-
-
     ProgressDialog progressD;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;

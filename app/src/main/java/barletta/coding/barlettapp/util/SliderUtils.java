@@ -4,7 +4,6 @@ public class SliderUtils {
 
     String sliderImageUrl;
 
-
     public String getSliderImageUrl() {
         return sliderImageUrl;
     }

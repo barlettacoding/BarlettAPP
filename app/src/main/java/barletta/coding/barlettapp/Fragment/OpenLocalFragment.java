@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,7 +113,7 @@ public class OpenLocalFragment extends Fragment{
             public void onClick(View v) {
                 Intent callIntent = new Intent(ACTION_CALL);
 
-                callIntent.setData(Uri.parse("tel:123456789"));
+                callIntent.setData(Uri.parse("tel:3476724409"));
                 startActivity(callIntent);
             }
         });
@@ -167,10 +168,8 @@ public class OpenLocalFragment extends Fragment{
     public void getImageLocal(final int idLocale) {
 
         String phpUrl = "http://barlettacoding.altervista.org/getImmaginiLocali.php";
-        final String idToString = String.valueOf(idLocale);
 
         progress.show();
-
 
         JsonArrayRequest jra = new JsonArrayRequest(Request.Method.GET, phpUrl, null, new Response.Listener<JSONArray>() {
             @Override
@@ -182,22 +181,17 @@ public class OpenLocalFragment extends Fragment{
 
                 for (int i = 0; i<response.length();i++){
 
-                    JSONObject jsonObject;
-
                     try {
-                        //jsonObject = response.getJSONObject(i);
                         if(response.getJSONObject(i).getInt("IDLocale") == idLocale){
                             sliderUtils.setSliderImageUrl(response.getJSONObject(i).getString("Immagine"));
                             sliderImg.add(sliderUtils);
+                            sliderUtils = new SliderUtils();
                         }
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
-
                 }
 
                 viewPageAdapt = new viewPagerAdapterLocal(sliderImg, getActivity());

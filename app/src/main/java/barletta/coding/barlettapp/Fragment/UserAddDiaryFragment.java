@@ -1,6 +1,7 @@
 package barletta.coding.barlettapp.Fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -45,8 +46,6 @@ public class UserAddDiaryFragment extends Fragment {
     public diaryObject addToDiary;
 
     private DiaryDbHelper dbHelper = null;
-
-    public diaryObject diaryToAdd;
 
     @Nullable
     @Override
@@ -156,6 +155,13 @@ public class UserAddDiaryFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_CANCELED && requestCode == 0){
+            Fragment fragment = new UserDiaryList();
+            FragmentManager manager = getFragmentManager();
+            manager.beginTransaction()
+                    .replace(R.id.fragmentView, fragment)
+                    .commit();
+        }
         bitmap = (Bitmap) data.getExtras().get("data");
         cameraView.setImageBitmap(bitmap);
         titleText.setVisibility(View.VISIBLE);
@@ -173,24 +179,12 @@ public class UserAddDiaryFragment extends Fragment {
 
     }
 
-    public String encodeBitmap() {
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] byteBitm = baos.toByteArray();
-        String encoded = Base64.encodeToString(byteBitm, Base64.DEFAULT);
-        return encoded;
-    }
-
     public void saveBitmapInternalStorage(Bitmap bitmapImage) {
 
         addToDiary = new diaryObject();
 
-        String title = titleText.getText().toString();
         String description = descText.getText().toString();
 
-
-        String toAddTitle = dbHelper.getNumberOfRow(SharedPrefManager.getInstance(getActivity()).getId());
         ContextWrapper cw = new ContextWrapper(getActivity());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
@@ -219,7 +213,6 @@ public class UserAddDiaryFragment extends Fragment {
         addToDiary.setPhotoEncoded(directory.getAbsolutePath());
 
         dbHelper.insertDiary(addToDiary, SharedPrefManager.getInstance(getActivity()).getId());
-        //return directory.getAbsolutePath()+photoTitle;
     }
 
 }
