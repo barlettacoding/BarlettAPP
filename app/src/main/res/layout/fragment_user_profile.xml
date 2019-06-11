@@ -177,7 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Confirm"
+        android:text="@string/confirmButton"
         app:layout_constraintBottom_toBottomOf="@+id/editTextInsertCode"
         app:layout_constraintStart_toEndOf="@+id/editTextInsertCode"
         app:layout_constraintTop_toTopOf="@+id/editTextInsertCode" />

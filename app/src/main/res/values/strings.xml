@@ -29,7 +29,7 @@
     <string name="save_text">Save</string>
     <string name="deleteString">Delete</string>
     <string name="insertPhotoTitle">Please, insert the title</string>
-    <string name="buttonHotel">Hotel and BeB</string>
+    <string name="buttonHotel">Hotel and BB</string>
     <string name="cultureButton">Culture</string>
     <string name="funButton">Fun</string>
     <string name="gastronomyButton">Gastronomy</string>
@@ -57,6 +57,7 @@
     <string name="delteAccountConfirm">Are you sure?</string>
     <string name="modifyDescription">Modify description</string>
     <string name="registerStringLogin">Need an account? Register here</string>
+    <string name="confirmButton">Confirm</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_maps_single_locale">Map</string>

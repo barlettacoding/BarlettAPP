@@ -23,7 +23,7 @@
     <string name="save_text">Salva</string>
     <string name="deleteString">Cancella</string>
     <string name="insertPhotoTitle">Per favore, inserisci il titolo</string>
-    <string name="buttonHotel">Hotel e BeB</string>
+    <string name="buttonHotel">Hotel e BB</string>
     <string name="cultureButton">Cultura</string>
     <string name="funButton">Svago</string>
     <string name="gastronomyButton">Gastronomia</string>
@@ -49,4 +49,5 @@
     <string name="modifyDescription">Modifica descrizione</string>
     <string name="registerStringLogin">Hai bisogno di un account? Registrati qui</string>
     <string name="title_activity_maps_single_locale">Mappa</string>
+    <string name="confirmButton">Conferma</string>
 </resources>
