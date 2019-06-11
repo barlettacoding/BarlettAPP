@@ -1,53 +1,53 @@
 <resources>
-    <string name="app_name">BarlettApp</string>
+    <string name="app_name" translatable="false">BarlettApp</string>
     <string name="usernameText">Username</string>
-    <string name="passwordText">Password</string>
-    <string name="buttonLogin">Login</string>
+    <string name="passwordText" translatable="false">Password</string>
+    <string name="buttonLogin" translatable="false">Login</string>
     <string name="buttonRegister">Register</string>
-    <string name="mailText">Email</string>
+    <string name="mailText" translatable="false">Email</string>
     <string name="progressRegistration">Registering user...</string>
     <string name="toastErrorRegistration">Error during registration</string>
-    <string name="progressDialogLogin">Logging...</string>
+    <string name="progressDialogLogin" translatable="false">Logging...</string>
     <string name="missingUsername">Missing username</string>
     <string name="missingEmail">Missing email</string>
     <string name="missingPassword">Missing password</string>
     <string name="passwordNotMatch">Password doesnt match</string>
     <string name="confermaPassword">Confirm password</string>
-    <string name="title_activity_cancella">cancella</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_activity_cancella">Undo</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="profile_bottom_bar">Profile</string>
     <string name="favourite_bottom_bar">Favourite</string>
     <string name="diary_bottom_bar">Diary</string>
     <string name="buttonDeleteAccount">Delete Account</string>
-    <string name="buttonProfileLogout">Logout</string>
+    <string name="buttonProfileLogout" translatable="false">Logout</string>
     <string name="buttonCancel">Cancel</string>
-    <string name="textViewNomeLocaleLista">Nome</string>
+    <string name="textViewNomeLocaleLista">Local Name</string>
     <string name="description_text">Description</string>
     <string name="title_text">Title</string>
     <string name="save_text">Save</string>
     <string name="deleteString">Delete</string>
     <string name="insertPhotoTitle">Please, insert the title</string>
-    <string name="buttonHotel">Hotel</string>
+    <string name="buttonHotel">Hotel and BeB</string>
     <string name="cultureButton">Culture</string>
     <string name="funButton">Fun</string>
     <string name="gastronomyButton">Gastronomy</string>
-    <string name="relaxButton">Relax</string>
+    <string name="relaxButton" translatable="false">Relax</string>
     <string name="greenSpaceButton">Green Space</string>
     <string name="giveUsFeedback">Give us a feedback!</string>
     <string name="thanksForFeedback">Thank you!</string>
     <string name="title_activity_maps">Map</string>
-    <string name="couponBar">Coupon</string>
+    <string name="couponBar" translatable="false">Coupon</string>
     <string name="deletePhoto">Do you want delete this photo?</string>
     <string name="infoAccount">Account info</string>
-    <string name="tipeAccountString">Type</string>
+    <string name="tipeAccountString">Account Type</string>
     <string name="userType">User</string>
-    <string name="managerType">Manager</string>
-    <string name="becomeManager">become a manager</string>
+    <string name="managerType" translatable="false">Manager</string>
+    <string name="becomeManager">Become a manager</string>
     <string name="accountOption">Account option</string>
-    <string name="askForCode">Ask your code</string>
-    <string name="codeExplanation">Inserire spiegazione del codice</string>
+    <string name="askForCode">Ask your code!</string>
+    <string name="codeExplanation">You will recive a code via mail to make sure you are the manager of the venue</string>
     <string name="changeDescription">Change description</string>
     <string name="addCoupon">Add coupon</string>
     <string name="couponDescriptionTitle">Insert the detail of your coupon</string>
@@ -58,7 +58,7 @@
     <string name="modifyDescription">Modify description</string>
     <string name="registerStringLogin">Need an account? Register here</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_maps_single_locale">Map</string>
 
 </resources>
