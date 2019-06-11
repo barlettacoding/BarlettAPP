@@ -50,4 +50,7 @@
     <string name="registerStringLogin">Hai bisogno di un account? Registrati qui</string>
     <string name="title_activity_maps_single_locale">Mappa</string>
     <string name="confirmButton">Conferma</string>
+    <string name="managerSucces">Codice corretto</string>
+    <string name="couponAddedd">Coupon inserito</string>
+    <string name="loginError">Errore durante il login</string>
 </resources>

@@ -77,7 +77,7 @@ public class AddCouponFragment extends Fragment {
         StringRequest request = new StringRequest(Request.Method.POST, addCouponUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Toast.makeText(getContext(), "COUPON MESSO", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.couponAddedd, Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
