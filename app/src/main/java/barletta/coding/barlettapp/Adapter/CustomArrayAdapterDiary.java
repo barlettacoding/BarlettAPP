@@ -50,7 +50,7 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
 
         final PopupUtil popup = new PopupUtil();
 
-        dbHelper = new DiaryDbHelper(getContext(),null,null,1);
+        dbHelper = new DiaryDbHelper(getContext(), null, null, 1);
 
         final diaryObject currentDiary = diaryList.get(position);
 
@@ -77,14 +77,13 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
                         dbHelper.deleteFromDiary(currentDiary.getId());
 
                         Fragment fragment = new UserDiaryList();
-                        FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                        FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                         fragmentManager.beginTransaction()
-                                .replace(R.id.fragmentView,fragment)
+                                .replace(R.id.fragmentView, fragment)
                                 .commit();
                         popup.popUpDismiss();
                     }
-                },"Vuoi cancellare la foto?",mContext);
-
+                }, "Vuoi cancellare la foto?", mContext);
 
 
             }
@@ -95,9 +94,9 @@ public class CustomArrayAdapterDiary extends ArrayAdapter<diaryObject> {
             public void onClick(View v) {
                 OpenDiaryFragment.setDiaryObject(currentDiary);
                 Fragment fragment = new OpenDiaryFragment();
-                FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentView,fragment, "OPEN_DIARY")
+                        .replace(R.id.fragmentView, fragment, "OPEN_DIARY")
                         .commit();
             }
         });

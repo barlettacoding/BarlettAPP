@@ -206,5 +206,4 @@
         app:layout_constraintTop_toTopOf="@+id/editTextInsertCode" />
 
 
-
 </android.support.constraint.ConstraintLayout>

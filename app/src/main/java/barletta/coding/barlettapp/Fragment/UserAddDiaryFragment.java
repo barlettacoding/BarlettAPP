@@ -14,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,15 +22,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import barletta.coding.barlettapp.javaClass.DiaryDbHelper;
 import barletta.coding.barlettapp.R;
-import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.UserDiaryList;
+import barletta.coding.barlettapp.javaClass.DiaryDbHelper;
+import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.javaClass.diaryObject;
 
 
@@ -71,9 +69,9 @@ public class UserAddDiaryFragment extends Fragment {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(titleText.getText().toString().isEmpty()){
+                if (titleText.getText().toString().isEmpty()) {
                     titleText.setError(getString(R.string.insertPhotoTitle));
-                }else{
+                } else {
 
                     saveBitmapInternalStorage(bitmap);
                     Fragment fragment = new UserDiaryList();
@@ -155,7 +153,7 @@ public class UserAddDiaryFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_CANCELED && requestCode == 0){
+        if (resultCode == Activity.RESULT_CANCELED && requestCode == 0) {
             Fragment fragment = new UserDiaryList();
             FragmentManager manager = getFragmentManager();
             manager.beginTransaction()

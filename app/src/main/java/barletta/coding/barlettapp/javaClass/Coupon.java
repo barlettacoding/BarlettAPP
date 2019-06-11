@@ -16,7 +16,8 @@ public class Coupon {
         this.IDManager = IDManager;
     }
 
-    public Coupon(){}
+    public Coupon() {
+    }
 
     public void setID(int ID) {
         this.ID = ID;
@@ -24,10 +25,6 @@ public class Coupon {
 
     public int getID() {
         return ID;
-    }
-
-    public int getIDLocale() {
-        return IDLocale;
     }
 
     public void setIDLocale(int IDLocale) {

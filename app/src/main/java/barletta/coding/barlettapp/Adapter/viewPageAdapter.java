@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 
@@ -21,11 +20,10 @@ import java.util.List;
 import barletta.coding.barlettapp.Fragment.OpenLocalFragment;
 import barletta.coding.barlettapp.HomeActivity;
 import barletta.coding.barlettapp.R;
-import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.util.MySingleton;
 import barletta.coding.barlettapp.util.SliderUtils;
 
-public class viewPageAdapter extends PagerAdapter{
+public class viewPageAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
@@ -92,44 +90,44 @@ public class viewPageAdapter extends PagerAdapter{
                     //AGGIUNGERE FRAGMENT PER IL LOCALE. PROPRIO PER IL LOCALE
                     Fragment fragment = new OpenLocalFragment();
                     OpenLocalFragment.setIdLocale(HomeActivity.localiTendenza[0]);
-                    FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                    FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
                     fm.beginTransaction()
-                            .replace(R.id.fragmentView,fragment, "LOCAL_OPEN")
+                            .replace(R.id.fragmentView, fragment, "LOCAL_OPEN")
                             .commit();
-                    ((HomeActivity)context).hideClasseObject();
+                    ((HomeActivity) context).hideClasseObject();
 
                 } else if (position == 1) {
                     Fragment fragment = new OpenLocalFragment();
                     OpenLocalFragment.setIdLocale(HomeActivity.localiTendenza[1]);
-                    FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                    FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
                     fm.beginTransaction()
-                            .replace(R.id.fragmentView,fragment, "LOCAL_OPEN")
+                            .replace(R.id.fragmentView, fragment, "LOCAL_OPEN")
                             .commit();
-                    ((HomeActivity)context).hideClasseObject();
+                    ((HomeActivity) context).hideClasseObject();
                 } else if (position == 2) {
                     Fragment fragment = new OpenLocalFragment();
                     OpenLocalFragment.setIdLocale(HomeActivity.localiTendenza[2]);
-                    FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                    FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
                     fm.beginTransaction()
-                            .replace(R.id.fragmentView,fragment, "LOCAL_OPEN")
+                            .replace(R.id.fragmentView, fragment, "LOCAL_OPEN")
                             .commit();
-                    ((HomeActivity)context).hideClasseObject();
+                    ((HomeActivity) context).hideClasseObject();
                 } else if (position == 3) {
                     Fragment fragment = new OpenLocalFragment();
                     OpenLocalFragment.setIdLocale(HomeActivity.localiTendenza[3]);
-                    FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                    FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
                     fm.beginTransaction()
-                            .replace(R.id.fragmentView,fragment, "LOCAL_OPEN")
+                            .replace(R.id.fragmentView, fragment, "LOCAL_OPEN")
                             .commit();
-                    ((HomeActivity)context).hideClasseObject();
+                    ((HomeActivity) context).hideClasseObject();
                 } else if (position == 4) {
                     Fragment fragment = new OpenLocalFragment();
                     OpenLocalFragment.setIdLocale(HomeActivity.localiTendenza[4]);
-                    FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                    FragmentManager fm = ((AppCompatActivity) context).getSupportFragmentManager();
                     fm.beginTransaction()
-                            .replace(R.id.fragmentView,fragment, "LOCAL_OPEN")
+                            .replace(R.id.fragmentView, fragment, "LOCAL_OPEN")
                             .commit();
-                    ((HomeActivity)context).hideClasseObject();
+                    ((HomeActivity) context).hideClasseObject();
                 }
             }
         });

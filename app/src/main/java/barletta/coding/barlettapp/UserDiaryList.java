@@ -41,7 +41,7 @@ public class UserDiaryList extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        db = new DiaryDbHelper(getActivity(),null,null ,1);
+        db = new DiaryDbHelper(getActivity(), null, null, 1);
         inizializeComponent();
 
         addToDiary.setOnClickListener(new View.OnClickListener() {
@@ -61,34 +61,31 @@ public class UserDiaryList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                diaryToOpen = (diaryObject)parent.getItemAtPosition(position);
+                diaryToOpen = (diaryObject) parent.getItemAtPosition(position);
                 OpenDiaryFragment.setDiaryObject(diaryToOpen);
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction()
-                        .replace(R.id.fragmentView,new OpenDiaryFragment())
+                        .replace(R.id.fragmentView, new OpenDiaryFragment())
                         .commit();
             }
         });
 
 
-
     }
 
-    public void inizializeComponent(){
+    public void inizializeComponent() {
 
         diaryList = db.getListDiary(SharedPrefManager.getInstance(getActivity()).getId());
-        if (diaryList == null){
+        if (diaryList == null) {
             diaryList = new ArrayList<>();
         }
         addToDiary = getView().findViewById(R.id.buttonAddToDiary);
         diaryListView = getView().findViewById(R.id.listViewDiary);
-        diaryAdapter = new CustomArrayAdapterDiary(getActivity(),diaryList);
+        diaryAdapter = new CustomArrayAdapterDiary(getActivity(), diaryList);
         diaryListView.setAdapter(diaryAdapter);
 
         layout = getView().findViewById(R.id.constraintDiaryList);
     }
-
-
 
 
 }

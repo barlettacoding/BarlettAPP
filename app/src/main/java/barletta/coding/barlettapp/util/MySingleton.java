@@ -79,10 +79,6 @@ public class MySingleton {
         getRequestQueue().add(req);
     }
 
-    public <T> void addToRequestQueueImage(Request<T> req) {
-        getRequestQueueImage().add(req);
-    }
-
     public ImageLoader getImageLoader() {
         return imageLoader;
     }

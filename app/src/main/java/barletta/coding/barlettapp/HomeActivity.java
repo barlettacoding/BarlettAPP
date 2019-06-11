@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -15,7 +16,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -50,7 +50,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import barletta.coding.barlettapp.Adapter.CustomArrayAdapterDiary;
 import barletta.coding.barlettapp.Adapter.viewPageAdapter;
 import barletta.coding.barlettapp.Fragment.CategoryListActivity;
 import barletta.coding.barlettapp.Fragment.CouponFragment;
@@ -83,7 +82,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
 
 
         //Come prima cosa, vediamo se l'utente è loggato, se no, lo mandiamo al login
@@ -214,18 +212,16 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         });
 
 
-
-
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("Bundle");
 
-        if (bundle != null){
+        if (bundle != null) {
             Locale local = (Locale) bundle.getSerializable("Locale");
             Fragment fragment = new OpenLocalFragment();
             ((OpenLocalFragment) fragment).setIdLocale(local);
             FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction()
-                    .replace(R.id.fragmentView,fragment)
+                    .replace(R.id.fragmentView, fragment)
                     .commit();
             hideClasseObject();
         }
@@ -632,7 +628,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         if (keyCode == KeyEvent.KEYCODE_BACK && fragmentManager.findFragmentByTag("LOCAL_OPEN").isVisible()) {
             Fragment frag = new CategoryListActivity();
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentView,frag)
+                    .replace(R.id.fragmentView, frag)
                     .commit();
             return true;
         }
@@ -641,18 +637,18 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-    public void checkPermission(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+    public void checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
         }
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
     }
 
-    public void getCoupon(){
+    public void getCoupon() {
 
         String urlRequest = "http://barlettacoding.altervista.org/getListaCoupon.php";
         CouponFragment.listaCoupon = new ArrayList<>();

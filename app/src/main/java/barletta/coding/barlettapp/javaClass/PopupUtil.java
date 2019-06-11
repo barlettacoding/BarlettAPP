@@ -1,7 +1,6 @@
 package barletta.coding.barlettapp.javaClass;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +20,17 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import barletta.coding.barlettapp.util.MySingleton;
 import barletta.coding.barlettapp.R;
+import barletta.coding.barlettapp.util.MySingleton;
 
 public class PopupUtil {
 
     static public PopupWindow popup = null;
 
-    public PopupUtil (){}
+    public PopupUtil() {
+    }
 
-    public void createPopUp(View.OnClickListener deleteListener, String message, Context mContext){
+    public void createPopUp(View.OnClickListener deleteListener, String message, Context mContext) {
 
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_util, null);
@@ -57,11 +57,11 @@ public class PopupUtil {
 
     }
 
-    public void popUpDismiss(){
+    public void popUpDismiss() {
         popup.dismiss();
     }
 
-    public void createPopUpRatingBar(final int idLocale, String message, final Context mContext){
+    public void createPopUpRatingBar(final int idLocale, String message, final Context mContext) {
 
         final RatingBar rateBar;
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
@@ -96,7 +96,7 @@ public class PopupUtil {
 
     }
 
-    public void giveRate(int IdLocale, float rate, final Context mContext){
+    public void giveRate(int IdLocale, float rate, final Context mContext) {
 
         final String idToString = Integer.toString(IdLocale);
         final String rateToString = Float.toString(rate);
@@ -106,15 +106,15 @@ public class PopupUtil {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, giveRateUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(mContext, "Grazie!",Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Grazie!", Toast.LENGTH_LONG).show();
                 popup.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext,"Fallito",Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Fallito", Toast.LENGTH_LONG).show();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();

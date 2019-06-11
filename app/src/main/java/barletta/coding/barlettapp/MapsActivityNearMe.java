@@ -8,15 +8,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.google.android.gms.common.ConnectionResult;
@@ -41,7 +40,7 @@ import barletta.coding.barlettapp.javaClass.Locale;
 import barletta.coding.barlettapp.util.MySingleton;
 import barletta.coding.barlettapp.util.findLocal;
 
-public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCallback{
+public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCallback {
 
 
     private GoogleMap mMap;
@@ -53,7 +52,6 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
     public ArrayList<LatLng> markerToShowLat = new ArrayList<>();
     private findLocal localHelper = new findLocal();
     private ImageLoader imgLoader;
-
 
 
     @Override
@@ -184,8 +182,8 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
         taskForLocal.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                if(location != null){
-                    myCurrentPosition = new LatLng(location.getLatitude(),location.getLongitude());
+                if (location != null) {
+                    myCurrentPosition = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(myCurrentPosition));
                     //mMap.addMarker(new MarkerOptions().position(myCurrentPosition).title("CASA MIA"));
 
@@ -206,8 +204,8 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
             public View getInfoContents(Marker marker) {
                 //Prendiamo la posizione dal marker, che poi uso per il controllo degli oggetti
                 LatLng latLng = marker.getPosition();
-                Locale temp = localHelper.findLocalWithCoord(latLng.latitude,latLng.longitude);
-                View v = getLayoutInflater().inflate(R.layout.info_windows_adapter,null);
+                Locale temp = localHelper.findLocalWithCoord(latLng.latitude, latLng.longitude);
+                View v = getLayoutInflater().inflate(R.layout.info_windows_adapter, null);
                 TextView localName = v.findViewById(R.id.textViewInfoWindowName);
                 localName.setText(temp.getNome());
                 TextView localDescrption = v.findViewById(R.id.textViewInfoWindowDescrizione);
@@ -222,13 +220,13 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
             @Override
             public void onInfoWindowClick(Marker marker) {
                 LatLng latLng = marker.getPosition();
-                Locale temp = localHelper.findLocalWithCoord(latLng.latitude,latLng.longitude);
+                Locale temp = localHelper.findLocalWithCoord(latLng.latitude, latLng.longitude);
                 //Chiamo la HomeActivty, con un extra, e da li apro il OpenLocalFragment con questo locale temp
-                Intent intet = new Intent(MapsActivityNearMe.this,HomeActivity.class);
+                Intent intet = new Intent(MapsActivityNearMe.this, HomeActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Locale", temp);
-                bundle.putBoolean("Check",true);
-                intet.putExtra("Bundle",bundle);
+                bundle.putBoolean("Check", true);
+                intet.putExtra("Bundle", bundle);
                 startActivity(intet);
 
             }
@@ -236,9 +234,9 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
 
 
         Iterator<Locale> localeIterator = CategoryListActivity.listToShow.iterator();
-        while (localeIterator.hasNext()){
+        while (localeIterator.hasNext()) {
             Locale currentLocal = localeIterator.next();
-            mMap.addMarker(new MarkerOptions().position(new LatLng(currentLocal.getLatitude(),currentLocal.getLongitude())).title(currentLocal.getNome()));
+            mMap.addMarker(new MarkerOptions().position(new LatLng(currentLocal.getLatitude(), currentLocal.getLongitude())).title(currentLocal.getNome()));
         }
 
 
@@ -246,17 +244,5 @@ public class MapsActivityNearMe extends FragmentActivity implements OnMapReadyCa
         mMap.setMinZoomPreference(16.0f);
 
     }
-
-    public void createMarkerForTheMap(){
-        Iterator<Locale> localeIterator = CategoryListActivity.listToShow.iterator();
-        while (localeIterator.hasNext()){
-            Locale current = localeIterator.next();
-            markerToShowLat.add(new LatLng(current.getLatitude(),current.getLongitude()));
-        }
-    }
-
-
-
-
 
 }

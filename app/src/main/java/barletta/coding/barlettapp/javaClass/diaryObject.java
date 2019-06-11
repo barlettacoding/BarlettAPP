@@ -9,14 +9,6 @@ public class diaryObject {
     public diaryObject() {
     }
 
-    public diaryObject(String photo, String title, String description) {
-
-        this.photoEncoded = photo;
-        this.title = title;
-        this.description = description;
-
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }

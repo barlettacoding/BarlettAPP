@@ -38,11 +38,12 @@ public class UserFragment extends Fragment {
     Locale managerLocale;
     EditText insertCode;
     String correctCode = "865943";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if(SharedPrefManager.getInstance(getContext()).getTipo() == 2){
+        if (SharedPrefManager.getInstance(getContext()).getTipo() == 2) {
             return inflater.inflate(R.layout.fragment_user_profile_manager, null);
         }
 
@@ -63,13 +64,12 @@ public class UserFragment extends Fragment {
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(insertCode.getText().toString().trim().equals(correctCode)){
+                if (insertCode.getText().toString().trim().equals(correctCode)) {
                     confirmCodeSend();
                 }
 
             }
         });
-
 
 
         buttonAskCode.setOnClickListener(new View.OnClickListener() {
@@ -84,11 +84,11 @@ public class UserFragment extends Fragment {
         name.setText(getString(R.string.usernameText) + " : " + SharedPrefManager.getInstance(getActivity()).getUsername());
         email.setText(getString(R.string.mailText) + " : " + SharedPrefManager.getInstance(getActivity()).getUserEmail());
 
-        if(SharedPrefManager.getInstance(getActivity()).getTipo() == 2){
-            accountType.setText(getString(R.string.tipeAccountString)+" : "+getString(R.string.managerType));
+        if (SharedPrefManager.getInstance(getActivity()).getTipo() == 2) {
+            accountType.setText(getString(R.string.tipeAccountString) + " : " + getString(R.string.managerType));
             startManagerLayout();
-        }else{
-            accountType.setText(getString(R.string.tipeAccountString)+" : "+getString(R.string.userType));
+        } else {
+            accountType.setText(getString(R.string.tipeAccountString) + " : " + getString(R.string.userType));
         }
 
         buttonLogout = getView().findViewById(R.id.buttonProfileLogout);
@@ -117,7 +117,7 @@ public class UserFragment extends Fragment {
 
             }
         });
-        if(SharedPrefManager.getInstance(getActivity()).getTipo() == 2){
+        if (SharedPrefManager.getInstance(getActivity()).getTipo() == 2) {
 
             addCoupon = getView().findViewById(R.id.buttonAddCoupon);
 
@@ -127,7 +127,7 @@ public class UserFragment extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment frag = new AddCouponFragment();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragmentView,frag)
+                            .replace(R.id.fragmentView, frag)
                             .commit();
                 }
             });
@@ -141,18 +141,16 @@ public class UserFragment extends Fragment {
         }
 
 
-
-
     }
 
-    public void findManagerlocal(){
+    public void findManagerlocal() {
 
         int UserId = SharedPrefManager.getInstance(getActivity()).getId();
         Iterator<Locale> iterator = CategoryListActivity.lista.iterator();
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Locale temp = iterator.next();
-            if(temp.getIdGestore() == UserId){
+            if (temp.getIdGestore() == UserId) {
                 managerLocale = temp;
             }
         }
@@ -161,12 +159,12 @@ public class UserFragment extends Fragment {
         OpenLocalFragment.setIdLocale(managerLocale);
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction()
-                .replace(R.id.fragmentView,fragment)
+                .replace(R.id.fragmentView, fragment)
                 .commit();
 
     }
 
-    public void sendMailWithCode(){
+    public void sendMailWithCode() {
 
         final String email = SharedPrefManager.getInstance(getActivity()).getUserEmail().trim();
 
@@ -182,7 +180,7 @@ public class UserFragment extends Fragment {
             public void onErrorResponse(VolleyError volleyError) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -195,7 +193,7 @@ public class UserFragment extends Fragment {
 
     }
 
-    public void confirmCodeSend(){
+    public void confirmCodeSend() {
 
         final String userID = Integer.toString(SharedPrefManager.getInstance(getActivity()).getId());
         final String LocalID = "5";
@@ -205,7 +203,7 @@ public class UserFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlChangeManager, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Toast.makeText(getContext(),"BRAVO!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "BRAVO!", Toast.LENGTH_LONG).show();
                 SharedPrefManager.getInstance(getActivity()).logout();
                 startActivity(new Intent(getActivity(), LoginAndRegister.class));
 
@@ -215,7 +213,7 @@ public class UserFragment extends Fragment {
             public void onErrorResponse(VolleyError volleyError) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -229,7 +227,7 @@ public class UserFragment extends Fragment {
 
     }
 
-    public void startManagerLayout(){
+    public void startManagerLayout() {
 
         TextView becomeMan = getView().findViewById(R.id.textViewBecomeManager);
         becomeMan.setText("Manager Option");

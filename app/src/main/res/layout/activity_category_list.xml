@@ -18,7 +18,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:shadowRadius="12"/>
+        android:shadowRadius="12" />
 
     <ListView
         android:id="@+id/listViewCategoryList"

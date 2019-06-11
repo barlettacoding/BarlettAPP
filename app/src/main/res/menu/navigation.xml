@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_favourite"
         android:icon="@drawable/round_card_giftcard_black_24dp"
-        android:title="@string/couponBar"/>
+        android:title="@string/couponBar" />
 
     <item
         android:id="@+id/navigation_diary"

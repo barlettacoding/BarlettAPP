@@ -1,28 +1,19 @@
 package barletta.coding.barlettapp.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import barletta.coding.barlettapp.Adapter.CustomArrayAdapterCategoryList;
 import barletta.coding.barlettapp.Adapter.CustomArrayAdapterCoupon;
-import barletta.coding.barlettapp.MapsActivityNearMe;
 import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.javaClass.Coupon;
-import barletta.coding.barlettapp.javaClass.Locale;
-import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 
 public class CouponFragment extends Fragment {
 
@@ -50,7 +41,6 @@ public class CouponFragment extends Fragment {
         listViewCategoryList.setAdapter(categoryAdapter);
 
     }
-
 
 
 }

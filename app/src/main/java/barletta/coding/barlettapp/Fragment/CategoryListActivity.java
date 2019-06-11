@@ -1,18 +1,17 @@
 package barletta.coding.barlettapp.Fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -58,7 +57,7 @@ public class CategoryListActivity extends Fragment {
                 OpenLocalFragment.setIdLocale(locale);
                 FragmentManager fm = getFragmentManager();
                 fm.beginTransaction()
-                        .replace(R.id.fragmentView,fragment, "LOCAL_OPEN")
+                        .replace(R.id.fragmentView, fragment, "LOCAL_OPEN")
                         .commit();
 
             }
@@ -75,13 +74,13 @@ public class CategoryListActivity extends Fragment {
 
     }
 
-    public static void showCorecctList(int tipo){
+    public static void showCorecctList(int tipo) {
 
         Iterator<Locale> listIterator = lista.listIterator();
 
-        while(listIterator.hasNext()){
+        while (listIterator.hasNext()) {
             Locale local = listIterator.next();
-            if(local.getTipologia() == tipo){
+            if (local.getTipologia() == tipo) {
                 listToShow.add(local);
             }
         }

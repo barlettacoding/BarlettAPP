@@ -61,9 +61,7 @@ public class CustomArrayAdapterCategoryList extends ArrayAdapter<Locale> {
         RatingBar ratingBarList = listItem.findViewById(R.id.ratingBarList);
         DrawableCompat.setTint(ratingBarList.getProgressDrawable(), ContextCompat.getColor(mContext, R.color.colorPrimary));
 
-        ratingBarList.setRating((float)currentLocale.getVoto()/currentLocale.getNumeroVoti());
-
-
+        ratingBarList.setRating((float) currentLocale.getVoto() / currentLocale.getNumeroVoti());
 
 
         return listItem;

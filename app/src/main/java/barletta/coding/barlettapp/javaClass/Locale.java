@@ -81,17 +81,19 @@ public class Locale implements Serializable {
         this.immagine = immagine;
     }
 
-    public void setVoto(double voto){
+    public void setVoto(double voto) {
         this.voto = voto;
     }
 
-    public double getVoto(){return voto;}
+    public double getVoto() {
+        return voto;
+    }
 
-    public void setNumeroVoti(int numeroVoti){
+    public void setNumeroVoti(int numeroVoti) {
         this.numeroVoti = numeroVoti;
     }
 
-    public int getNumeroVoti(){
+    public int getNumeroVoti() {
         return numeroVoti;
     }
 }

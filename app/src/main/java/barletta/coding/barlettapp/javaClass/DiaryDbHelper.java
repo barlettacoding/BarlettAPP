@@ -89,21 +89,21 @@ public class DiaryDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteFromDiary(int idDelete){
+    public void deleteFromDiary(int idDelete) {
 
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMN_ID + " = "+idDelete,null);
+        db.delete(TABLE_NAME, COLUMN_ID + " = " + idDelete, null);
         db.close();
     }
 
-    public String getNumberOfRow(int userID){
-        String queryCount = "SELECT * FROM "+TABLE_NAME+" WHERE "+COLUMN_USERID+" = "+userID+";";
+    public String getNumberOfRow(int userID) {
+        String queryCount = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_USERID + " = " + userID + ";";
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor mCursosr = db.rawQuery(queryCount,null);
+        Cursor mCursosr = db.rawQuery(queryCount, null);
 
         String number = String.valueOf(mCursosr.getCount());
-        return " ("+number+")";
+        return " (" + number + ")";
     }
 
 }

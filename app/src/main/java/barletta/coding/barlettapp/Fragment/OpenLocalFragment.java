@@ -1,6 +1,5 @@
 package barletta.coding.barlettapp.Fragment;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,23 +7,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,26 +29,25 @@ import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import barletta.coding.barlettapp.Adapter.viewPagerAdapterLocal;
 import barletta.coding.barlettapp.HomeActivity;
+import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.javaClass.Locale;
+import barletta.coding.barlettapp.javaClass.PopupUtil;
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.util.MySingleton;
-import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.util.SliderUtils;
-import barletta.coding.barlettapp.javaClass.PopupUtil;
-import barletta.coding.barlettapp.Adapter.viewPagerAdapterLocal;
 
 import static android.content.Intent.ACTION_CALL;
 
 
-public class OpenLocalFragment extends Fragment{
+public class OpenLocalFragment extends Fragment {
 
     private EditText editableDescription;
     private RatingBar LocalRate;
@@ -76,7 +69,7 @@ public class OpenLocalFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if(SharedPrefManager.getInstance(getActivity()).getTipo() == 2){
+        if (SharedPrefManager.getInstance(getActivity()).getTipo() == 2) {
             return inflater.inflate(R.layout.open_local_fragment_manager, null);
         }
 
@@ -87,7 +80,7 @@ public class OpenLocalFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((HomeActivity)getActivity()).setActionBar(false);
+        ((HomeActivity) getActivity()).setActionBar(false);
 
         progress = new ProgressDialog(getActivity());
         nameLocal = getActivity().findViewById(R.id.TextViewLocalName);
@@ -98,7 +91,7 @@ public class OpenLocalFragment extends Fragment{
         descrizioneLocale.setMovementMethod(new ScrollingMovementMethod());
         descrizioneLocale.setText(localeS.getDescrizioneCompleta());
 
-        if( SharedPrefManager.getInstance(getActivity()).getTipo() == 2){
+        if (SharedPrefManager.getInstance(getActivity()).getTipo() == 2) {
             startManagerLayout();
         }
 
@@ -132,10 +125,9 @@ public class OpenLocalFragment extends Fragment{
         openRatingBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupUtil.createPopUpRatingBar(localeS.getID(),getString(R.string.giveUsFeedback), getContext());
+                popupUtil.createPopUpRatingBar(localeS.getID(), getString(R.string.giveUsFeedback), getContext());
             }
         });
-
 
 
         imageSlider.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -161,8 +153,6 @@ public class OpenLocalFragment extends Fragment{
         });
 
 
-
-
     }
 
     public void getImageLocal(final int idLocale) {
@@ -179,10 +169,10 @@ public class OpenLocalFragment extends Fragment{
 
                 SliderUtils sliderUtils = new SliderUtils();
 
-                for (int i = 0; i<response.length();i++){
+                for (int i = 0; i < response.length(); i++) {
 
                     try {
-                        if(response.getJSONObject(i).getInt("IDLocale") == idLocale){
+                        if (response.getJSONObject(i).getInt("IDLocale") == idLocale) {
                             sliderUtils.setSliderImageUrl(response.getJSONObject(i).getString("Immagine"));
                             sliderImg.add(sliderUtils);
                             sliderUtils = new SliderUtils();
@@ -229,23 +219,23 @@ public class OpenLocalFragment extends Fragment{
 
     }
 
-    public static void setIdLocale(Locale locale){
+    public static void setIdLocale(Locale locale) {
         localeS = locale;
     }
 
-    public void setLocalStar(){
+    public void setLocalStar() {
         double finaleRate;
-        finaleRate = localeS.getVoto()/localeS.getNumeroVoti();
+        finaleRate = localeS.getVoto() / localeS.getNumeroVoti();
 
-        LocalRate.setRating((float)finaleRate);
+        LocalRate.setRating((float) finaleRate);
     }
 
-    public void changeDescription(){
+    public void changeDescription() {
         editableDescription.setEnabled(true);
         saveDescription.setVisibility(View.VISIBLE);
     }
 
-    public void SaveNewDescription(){
+    public void SaveNewDescription() {
 
         String url = "http://barlettacoding.altervista.org/changeLocalDescription.php";
 
@@ -264,7 +254,7 @@ public class OpenLocalFragment extends Fragment{
             public void onErrorResponse(VolleyError volleyError) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -278,13 +268,13 @@ public class OpenLocalFragment extends Fragment{
 
     }
 
-    public void startManagerLayout(){
+    public void startManagerLayout() {
 
         editableDescription = getView().findViewById(R.id.textViewDescrizioneOpenLocal);
         editableDescription.setEnabled(false);
         editableDescription.setText(localeS.getDescrizioneCompleta());
         changeLocalDescription = getView().findViewById(R.id.buttonChangeDescription);
-        if(localeS.getIdGestore() != SharedPrefManager.getInstance(getActivity()).getId()){
+        if (localeS.getIdGestore() != SharedPrefManager.getInstance(getActivity()).getId()) {
             changeLocalDescription.setVisibility(View.GONE);
         }
 

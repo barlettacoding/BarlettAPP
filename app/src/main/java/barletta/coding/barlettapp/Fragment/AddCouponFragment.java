@@ -30,6 +30,7 @@ public class AddCouponFragment extends Fragment {
 
     Locale managerLocale;
     EditText description;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,14 +54,14 @@ public class AddCouponFragment extends Fragment {
 
     }
 
-    public void saveCouponOnline(){
+    public void saveCouponOnline() {
 
         int UserId = SharedPrefManager.getInstance(getActivity()).getId();
         Iterator<Locale> iterator = CategoryListActivity.lista.iterator();
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Locale temp = iterator.next();
-            if(temp.getIdGestore() == UserId){
+            if (temp.getIdGestore() == UserId) {
                 managerLocale = temp;
             }
         }
@@ -83,7 +84,7 @@ public class AddCouponFragment extends Fragment {
             public void onErrorResponse(VolleyError volleyError) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
