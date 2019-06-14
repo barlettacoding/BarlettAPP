@@ -58,6 +58,9 @@
     <string name="modifyDescription">Modify description</string>
     <string name="registerStringLogin">Need an account? Register here</string>
     <string name="confirmButton">Confirm</string>
+    <string name="managerSucces">Code correct</string>
+    <string name="couponAddedd">Coupon Added!</string>
+    <string name="loginError">Login error</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_maps_single_locale">Map</string>

@@ -105,7 +105,7 @@ public class LoginAndRegister extends AppCompatActivity {
                                 finish();
                             } else {
                                 //Modificare il messaggio di errore. fare la stringa
-                                Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), R.string.loginError, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

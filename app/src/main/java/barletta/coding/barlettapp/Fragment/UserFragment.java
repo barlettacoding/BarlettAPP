@@ -203,7 +203,7 @@ public class UserFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlChangeManager, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Toast.makeText(getContext(), "BRAVO!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getString(R.string.managerSucces), Toast.LENGTH_LONG).show();
                 SharedPrefManager.getInstance(getActivity()).logout();
                 startActivity(new Intent(getActivity(), LoginAndRegister.class));
 
