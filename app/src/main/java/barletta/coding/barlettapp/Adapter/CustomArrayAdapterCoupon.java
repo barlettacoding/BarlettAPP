@@ -79,7 +79,7 @@ public class CustomArrayAdapterCoupon extends ArrayAdapter<Coupon> {
     public void deleteCoupon() {
 
         final String IdCopun = Integer.toString(currentCoupon.getID());
-        String deleteUrl = "http://barlettacoding.altervista.org/DeleteCoupon.php";
+        String deleteUrl = "https://barlettacoding.altervista.org/DeleteCoupon.php";
 
         StringRequest deleteCouponRequest = new StringRequest(Request.Method.POST, deleteUrl, new Response.Listener<String>() {
             @Override

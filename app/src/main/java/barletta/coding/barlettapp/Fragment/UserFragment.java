@@ -168,7 +168,7 @@ public class UserFragment extends Fragment {
 
         final String email = SharedPrefManager.getInstance(getActivity()).getUserEmail().trim();
 
-        String urlCode = "http://barlettacoding.altervista.org/sendMail.php";
+        String urlCode = "https://barlettacoding.altervista.org/sendMail.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlCode, new Response.Listener<String>() {
             @Override
@@ -198,7 +198,7 @@ public class UserFragment extends Fragment {
         final String userID = Integer.toString(SharedPrefManager.getInstance(getActivity()).getId());
         final String LocalID = "5";
 
-        String urlChangeManager = "http://barlettacoding.altervista.org/UpdateManagerLocal.php";
+        String urlChangeManager = "https://barlettacoding.altervista.org/UpdateManagerLocal.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlChangeManager, new Response.Listener<String>() {
             @Override

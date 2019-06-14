@@ -85,7 +85,7 @@ public class LoginAndRegister extends AppCompatActivity {
     private void userLogin() {
         final String username = this.username.getText().toString().trim();
         final String password = this.password.getText().toString().trim();
-        String urlLogin = "http://barlettacoding.altervista.org/login.php";
+        String urlLogin = "https://barlettacoding.altervista.org/login.php";
 
         progressDialog.show();
 

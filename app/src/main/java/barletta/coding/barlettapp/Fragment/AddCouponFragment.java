@@ -72,7 +72,7 @@ public class AddCouponFragment extends Fragment {
         final String idManager = Integer.toString(SharedPrefManager.getInstance(getActivity()).getId());
         //CREARE PHP CHE PRENDE IN POST STE COSE
 
-        String addCouponUrl = "http://barlettacoding.altervista.org/AddCoupon.php";
+        String addCouponUrl = "https://barlettacoding.altervista.org/AddCoupon.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, addCouponUrl, new Response.Listener<String>() {
             @Override

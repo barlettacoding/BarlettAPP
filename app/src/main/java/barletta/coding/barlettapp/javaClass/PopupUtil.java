@@ -101,7 +101,7 @@ public class PopupUtil {
         final String idToString = Integer.toString(IdLocale);
         final String rateToString = Float.toString(rate);
 
-        String giveRateUrl = "http://barlettacoding.altervista.org/rateLocal.php";
+        String giveRateUrl = "https://barlettacoding.altervista.org/rateLocal.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, giveRateUrl, new Response.Listener<String>() {
             @Override

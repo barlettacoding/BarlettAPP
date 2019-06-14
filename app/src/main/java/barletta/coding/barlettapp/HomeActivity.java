@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
     public static Locale[] localiTendenza; //Inseriamo i dati dei 5 locali di tendenza qui
     BottomNavigationView bottomNavigation; //BottomNavigation bar. Dobbiamo nascondere l'activity
 
-    String request_url = "http://barlettacoding.altervista.org/getListaLocali.php";
+    String request_url = "https://barlettacoding.altervista.org/getListaLocali.php";
     Button confirmDelete, cancelDelete, btHotel, bCulture, bFun, bRelax, bGreenSpace, bGastronomy;
 
     @Override
@@ -227,6 +227,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         }
 
         checkPermission();
+        checkPermissionGPS();
 
     }
 
@@ -528,7 +529,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     public void deleteAccountRequest() {
 
-        String urlDelete = "http://barlettacoding.altervista.org/DeleteUser.php";
+        String urlDelete = "https://barlettacoding.altervista.org/DeleteUser.php";
 
         int ID = SharedPrefManager.getInstance(this).getId();
         final String idToString = Integer.toString(ID);
@@ -569,7 +570,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
     public void sendRequestGetLocal() {
 
-        String urlRequest = "http://barlettacoding.altervista.org/getListaLocali.php";
+        String urlRequest = "https://barlettacoding.altervista.org/getListaLocali.php";
 
 
         JsonArrayRequest jSARequest = new JsonArrayRequest(Request.Method.GET, urlRequest, null,
@@ -642,15 +643,17 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
             ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
         }
 
+    }
+
+    public void checkPermissionGPS(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
-
     }
 
     public void getCoupon() {
 
-        String urlRequest = "http://barlettacoding.altervista.org/getListaCoupon.php";
+        String urlRequest = "https://barlettacoding.altervista.org/getListaCoupon.php";
         CouponFragment.listaCoupon = new ArrayList<>();
 
         JsonArrayRequest jSARequest = new JsonArrayRequest(Request.Method.GET, urlRequest, null,

@@ -157,7 +157,7 @@ public class OpenLocalFragment extends Fragment {
 
     public void getImageLocal(final int idLocale) {
 
-        String phpUrl = "http://barlettacoding.altervista.org/getImmaginiLocali.php";
+        String phpUrl = "https://barlettacoding.altervista.org/getImmaginiLocali.php";
 
         progress.show();
 
@@ -237,7 +237,7 @@ public class OpenLocalFragment extends Fragment {
 
     public void SaveNewDescription() {
 
-        String url = "http://barlettacoding.altervista.org/changeLocalDescription.php";
+        String url = "https://barlettacoding.altervista.org/changeLocalDescription.php";
 
         final String id = Integer.toString(localeS.getID());
         final String newDesciption = editableDescription.getText().toString().trim();

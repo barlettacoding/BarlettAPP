@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerUser() {
 
-        String urlRegister = "http://barlettacoding.altervista.org/registrazione.php";
+        String urlRegister = "https://barlettacoding.altervista.org/registrazione.php";
 
         final String username = usernameR.getText().toString().trim();
         final String password = passwordR.getText().toString().trim();

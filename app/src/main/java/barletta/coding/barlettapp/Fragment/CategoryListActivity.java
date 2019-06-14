@@ -1,11 +1,15 @@
 package barletta.coding.barlettapp.Fragment;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import barletta.coding.barlettapp.Adapter.CustomArrayAdapterCategoryList;
+import barletta.coding.barlettapp.HomeActivity;
 import barletta.coding.barlettapp.MapsActivityNearMe;
 import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.javaClass.Locale;
@@ -67,7 +72,13 @@ public class CategoryListActivity extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getContext(), MapsActivityNearMe.class));
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                }
+                else {
+                    startActivity(new Intent(getContext(), MapsActivityNearMe.class));
+                }
+
             }
         });
 
