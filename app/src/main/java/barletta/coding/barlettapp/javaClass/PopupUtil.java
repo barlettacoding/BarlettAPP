@@ -17,8 +17,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.net.URLStreamHandler;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import barletta.coding.barlettapp.R;
 import barletta.coding.barlettapp.util.MySingleton;

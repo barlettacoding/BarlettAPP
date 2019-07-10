@@ -81,14 +81,14 @@ public class UserFragment extends Fragment {
 
         //Conferma elimina account
 
-        name.setText(getString(R.string.usernameText) + " : " + SharedPrefManager.getInstance(getActivity()).getUsername());
-        email.setText(getString(R.string.mailText) + " : " + SharedPrefManager.getInstance(getActivity()).getUserEmail());
+        name.setText(getString(R.string.usernameText) + ": " + SharedPrefManager.getInstance(getActivity()).getUsername());
+        email.setText(getString(R.string.mailText) + ": " + SharedPrefManager.getInstance(getActivity()).getUserEmail());
 
         if (SharedPrefManager.getInstance(getActivity()).getTipo() == 2) {
-            accountType.setText(getString(R.string.tipeAccountString) + " : " + getString(R.string.managerType));
+            accountType.setText(getString(R.string.tipeAccountString) + ": " + getString(R.string.managerType));
             startManagerLayout();
         } else {
-            accountType.setText(getString(R.string.tipeAccountString) + " : " + getString(R.string.userType));
+            accountType.setText(getString(R.string.tipeAccountString) + ": " + getString(R.string.userType));
         }
 
         buttonLogout = getView().findViewById(R.id.buttonProfileLogout);
@@ -230,7 +230,7 @@ public class UserFragment extends Fragment {
     public void startManagerLayout() {
 
         TextView becomeMan = getView().findViewById(R.id.textViewBecomeManager);
-        becomeMan.setText("Manager Option");
+        becomeMan.setText(R.string.ManagerOption);
 
         buttonAskCode.setVisibility(View.GONE);
         buttonConfirm.setVisibility(View.GONE);

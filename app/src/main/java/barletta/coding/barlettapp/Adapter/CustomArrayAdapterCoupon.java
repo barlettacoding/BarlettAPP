@@ -3,6 +3,7 @@ package barletta.coding.barlettapp.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import barletta.coding.barlettapp.javaClass.Coupon;
 import barletta.coding.barlettapp.javaClass.SharedPrefManager;
 import barletta.coding.barlettapp.util.MySingleton;
 
-public class CustomArrayAdapterCoupon extends ArrayAdapter<Coupon> {
+public class CustomArrayAdapterCoupon extends ArrayAdapter<Coupon>{
 
     private Context mContext;
     private ArrayList<Coupon> listaCoupon;
@@ -103,6 +104,8 @@ public class CustomArrayAdapterCoupon extends ArrayAdapter<Coupon> {
         MySingleton.getInstance(getContext()).addToRequestQueue(deleteCouponRequest);
 
     }
+
+
 
 
 }
